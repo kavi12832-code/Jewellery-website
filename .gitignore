@@ -1,4 +1,4 @@
-﻿# Dependencies
+# Dependencies
 node_modules/
 .pnp
 .pnp.js
@@ -23,5 +23,5 @@ pnpm-debug.log*
 .DS_Store
 
 # Temporary extraction folders
-ezgif-*
+/ezgif-*/
 test_server.js
