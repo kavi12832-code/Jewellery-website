@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-espresso: #0D0906;
+    --gold-primary: #C9A227;
+    --champagne-rose: #E8C9A0;
+    --ruby-accent: #7A1F2B;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #0D0906;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Custom Luxury Scrollbar */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0D0906;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #C9A227, #E8C9A0);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #E8C9A0;
+  }
+}
+
+/* Navbar Link Hover Behavior (Cream #F5F0E6 with 0.25s smooth transition) */
+.nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.25s ease, opacity 0.25s ease;
+  display: inline-block;
+}
+
+.nav-link:hover {
+  color: #F5F0E6 !important;
+}
+
+/* Luxury Typography & Gradients */
+.font-serif-gold {
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  background: linear-gradient(180deg, #FFFFFF 20%, #E8C9A0 65%, #C9A227 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.font-serif-champagne {
+  font-family: 'Cinzel', 'Cormorant Garamond', serif;
+  background: linear-gradient(180deg, #FFFFFF 30%, #E8C9A0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-glow {
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  box-shadow: 0 0 20px rgba(201, 162, 39, 0.15);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-border-glow:hover {
+  border-color: rgba(232, 201, 160, 0.8);
+  box-shadow: 0 0 35px rgba(201, 162, 39, 0.35);
+}
+
+.gold-glow-btn {
+  background: linear-gradient(135deg, rgba(201,162,39,0.15) 0%, rgba(232,201,160,0.08) 50%, rgba(201,162,39,0.2) 100%);
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-glow-btn:hover {
+  border-color: rgba(232, 201, 160, 0.9);
+  box-shadow: 0 0 30px rgba(201, 162, 39, 0.35);
+  transform: translateY(-1px);
+}
+
+.gold-glow-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s ease;
+}
+
+.gold-glow-btn:hover::before {
+  left: 100%;
+}
+
+/* Subtle Film Grain / Atmospheric Dust Effect */
+.bg-vignette {
+  background: radial-gradient(ellipse at center, rgba(13,9,6,0) 0%, rgba(13,9,6,0.85) 75%, rgba(13,9,6,1) 100%);
+}
+
+.noise-overlay {
+  background-image: radial-gradient(rgba(201, 162, 39, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Infinite Marquee Animations */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee-smooth {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-smooth:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 42s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
