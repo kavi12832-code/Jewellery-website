@@ -35,49 +35,119 @@ export const ScrollyCanvas: React.FC<ScrollyCanvasProps> = ({
     return `/sequence/ezgif-frame-${frameNum}.jpg`;
   };
 
-  // Preload all 240 frames
-  useEffect(() => {
-    let loadedCount = 0;
-    const images: HTMLImageElement[] = [];
+  const lastDrawnFrameRef = useRef<number>(-1);
 
-    // Prioritize critical frames first for immediate render
-    const priorityIndices = [0, 60, 120, 180, 239];
-    priorityIndices.forEach((idx) => {
-      const img = new Image();
-      img.src = getFrameUrl(idx);
-    });
+  // Helper to get exact frame or closest available loaded frame
+  const getRenderImage = useCallback((targetIdx: number): HTMLImageElement | null => {
+    const direct = imagesRef.current[targetIdx];
+    if (direct && direct.complete && direct.naturalWidth > 0) return direct;
 
-    for (let i = 0; i < TOTAL_FRAMES; i++) {
-      const img = new Image();
-      img.src = getFrameUrl(i);
-      img.onload = () => {
-        loadedCount++;
-        const percent = Math.round((loadedCount / TOTAL_FRAMES) * 100);
-        setLoadProgress(percent);
-        if (loadedCount >= TOTAL_FRAMES) {
-          setIsLoaded(true);
-        }
-      };
-      img.onerror = () => {
-        loadedCount++;
-        if (loadedCount >= TOTAL_FRAMES) {
-          setIsLoaded(true);
-        }
-      };
-      images.push(img);
+    // Search outward for closest loaded frame
+    for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
+      const left = targetIdx - offset;
+      if (left >= 0) {
+        const imgL = imagesRef.current[left];
+        if (imgL && imgL.complete && imgL.naturalWidth > 0) return imgL;
+      }
+      const right = targetIdx + offset;
+      if (right < TOTAL_FRAMES) {
+        const imgR = imagesRef.current[right];
+        if (imgR && imgR.complete && imgR.naturalWidth > 0) return imgR;
+      }
     }
-
-    imagesRef.current = images;
-
-    return () => {
-      images.forEach((img) => {
-        img.onload = null;
-        img.onerror = null;
-      });
-    };
+    return null;
   }, []);
 
-  const lastDrawnFrameRef = useRef<number>(-1);
+  // Progressive Preloading Strategy: Instant Hero Display + Background Streaming
+  useEffect(() => {
+    let active = true;
+    const images: HTMLImageElement[] = new Array(TOTAL_FRAMES);
+    imagesRef.current = images;
+
+    let loadedCount = 0;
+
+    const onSingleImageLoad = () => {
+      if (!active) return;
+      loadedCount++;
+      const percent = Math.round((loadedCount / TOTAL_FRAMES) * 100);
+      setLoadProgress(percent);
+    };
+
+    const loadImage = (index: number): Promise<void> => {
+      return new Promise((resolve) => {
+        if (!active || images[index]) {
+          resolve();
+          return;
+        }
+        const img = new Image();
+        img.src = getFrameUrl(index);
+        images[index] = img;
+        img.onload = () => {
+          onSingleImageLoad();
+          resolve();
+        };
+        img.onerror = () => {
+          onSingleImageLoad();
+          resolve();
+        };
+      });
+    };
+
+    // Step 1: Load Frame 0 (Hero frame) first for instant initial display
+    loadImage(0).then(() => {
+      if (!active) return;
+      setIsLoaded(true); // Dismiss blocking screen in under 50-80ms!
+
+      // Step 2: Load key milestone angles across the 240 frames (every 8th frame)
+      const milestoneIndices: number[] = [];
+      for (let i = 8; i < TOTAL_FRAMES; i += 8) {
+        milestoneIndices.push(i);
+      }
+      if (!milestoneIndices.includes(TOTAL_FRAMES - 1)) {
+        milestoneIndices.push(TOTAL_FRAMES - 1);
+      }
+
+      Promise.all(milestoneIndices.map((idx) => loadImage(idx))).then(() => {
+        if (!active) return;
+
+        // Step 3: Stream the remaining frames in small batches so network is never choked
+        const remainingIndices: number[] = [];
+        for (let i = 0; i < TOTAL_FRAMES; i++) {
+          if (!images[i]) {
+            remainingIndices.push(i);
+          }
+        }
+
+        let currentBatch = 0;
+        const batchSize = 8;
+
+        const loadNextBatch = () => {
+          if (!active || currentBatch >= remainingIndices.length) return;
+          const batch = remainingIndices.slice(currentBatch, currentBatch + batchSize);
+          currentBatch += batchSize;
+          Promise.all(batch.map((idx) => loadImage(idx))).then(() => {
+            if (active && currentBatch < remainingIndices.length) {
+              setTimeout(loadNextBatch, 35);
+            }
+          });
+        };
+
+        loadNextBatch();
+      });
+    });
+
+    // Fallback: Ensure preloader is dismissed within 150ms even on slow mobile networks
+    const fallbackTimer = setTimeout(() => {
+      if (active) {
+        setIsLoaded(true);
+      }
+    }, 150);
+
+    return () => {
+      active = false;
+      clearTimeout(fallbackTimer);
+    };
+  }, []);
 
   // Draw current frame to Canvas with clean, highly-optimized composition
   const drawFrame = useCallback((frameIdx: number) => {
@@ -86,8 +156,8 @@ export const ScrollyCanvas: React.FC<ScrollyCanvasProps> = ({
     const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
 
-    const img = imagesRef.current[frameIdx];
-    if (!img || !img.complete || img.naturalWidth === 0) return;
+    const img = getRenderImage(frameIdx);
+    if (!img) return;
 
     // Use optimal resolution cap for buttery smooth 60-120fps performance
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -301,49 +371,20 @@ export const ScrollyCanvas: React.FC<ScrollyCanvasProps> = ({
     <div
       ref={containerRef}
       id="experience"
-      className="relative w-full bg-[#0D0906]"
-      style={{ height: '480vh' }}
+      className="relative w-full bg-[#0D0906] h-[240vh] md:h-[440vh]"
     >
       {/* Sticky Fullscreen Canvas Wrapper */}
-      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden bg-[#0D0906] flex items-center justify-center">
+      <div className="sticky top-0 left-0 w-full h-[100dvh] min-h-screen overflow-hidden bg-[#0D0906] flex items-center justify-center">
         {/* HTML5 Canvas */}
         <canvas
           ref={canvasRef}
-          className="w-full h-full block touch-none select-none bg-[#0D0906]"
+          className="w-full h-full block pointer-events-none select-none bg-[#0D0906]"
         />
 
         {/* Seamless Soft Edge Vignette & Ambient Radial Mask Overlays */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(13,9,6,0.25)_80%,#0D0906_98%)]" />
         <div className="pointer-events-none absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#0D0906] via-[#0D0906]/50 to-transparent" />
         <div className="pointer-events-none absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#0D0906] via-[#0D0906]/50 to-transparent" />
-
-        {/* Preloader Screen */}
-        {!isLoaded && (
-          <div className="absolute inset-0 z-50 bg-[#0D0906] flex flex-col items-center justify-center p-6 text-center">
-            <div className="relative mb-6">
-              <div className="w-16 h-16 rounded-full border border-gold-500/20 border-t-gold-400 animate-spin" />
-            </div>
-            
-            <h3 className="font-serif tracking-[0.25em] uppercase text-xl text-white mb-2 font-light">
-              BIZJEWELLERY
-            </h3>
-            
-            <p className="font-cormorant italic text-base text-champagne-200/80 mb-4 tracking-wider">
-              Loading our finest pieces...
-            </p>
-
-            <div className="w-48 h-1 bg-espresso-800 rounded-full overflow-hidden border border-gold-500/20">
-              <div
-                className="h-full bg-gradient-to-r from-gold-500 via-champagne-300 to-gold-400 transition-all duration-300"
-                style={{ width: `${loadProgress}%` }}
-              />
-            </div>
-            
-            <span className="text-[10px] font-mono text-gold-400/80 tracking-widest mt-3">
-              {loadProgress}% LOADED · 240 ATELIER FRAMES
-            </span>
-          </div>
-        )}
 
         {/* Synchronized Editorial Story Beats Overlay */}
         <StoryBeatsOverlay

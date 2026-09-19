@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ChevronDown } from 'lucide-react';
 
 interface StoryBeatsOverlayProps {
   progress: number; // 0 to 1
@@ -38,7 +38,7 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
   };
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-20 flex flex-col justify-center p-6 sm:p-12 md:p-16 max-w-7xl mx-auto">
+    <div className="pointer-events-none absolute inset-0 z-20 flex flex-col justify-center p-4 sm:p-10 md:p-16 max-w-7xl mx-auto">
       <div className="relative flex items-center justify-center my-auto w-full">
         {/* BEAT 1: HERO / INTRO (0 - 15%) */}
         {(() => {
@@ -52,28 +52,28 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
                 transform: `translateY(${y}px)`,
                 transition: 'opacity 0.25s ease-out, transform 0.25s ease-out'
               }}
-              className="text-center max-w-3xl mx-auto flex flex-col items-center pointer-events-auto"
+              className="text-center max-w-3xl mx-auto flex flex-col items-center pointer-events-auto px-2"
             >
-              <span className="text-[11px] tracking-[0.4em] text-gold-400 uppercase font-mono mb-4">
+              <span className="text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] text-gold-400 uppercase font-mono mb-2.5 sm:mb-4">
                 NEW COLLECTION 2026
               </span>
 
-              <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-light tracking-[0.06em] leading-[1.08] text-white drop-shadow-2xl mb-4">
+              <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.04em] sm:tracking-[0.06em] leading-[1.12] sm:leading-[1.08] text-white drop-shadow-2xl mb-3 sm:mb-4">
                 Timeless Elegance, Crafted in Gold
               </h1>
 
-              <p className="font-cormorant italic text-2xl sm:text-3xl text-champagne-200/90 font-normal mb-6 tracking-wide">
+              <p className="font-cormorant italic text-lg sm:text-2xl md:text-3xl text-champagne-200/90 font-normal mb-3 sm:mb-6 tracking-wide">
                 Each piece hand-finished by our artisans.
               </p>
 
-              <p className="text-sm sm:text-base text-white/70 max-w-xl mx-auto leading-relaxed mb-8 font-light">
+              <p className="text-xs sm:text-sm md:text-base text-white/70 max-w-xl mx-auto leading-relaxed mb-6 sm:mb-8 font-light">
                 Using gold and gemstones sourced with the same care as generations before. For over three decades, Bizjewellery has been synonymous with fine craftsmanship and timeless design.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center w-full max-w-md sm:max-w-none">
                 <button
                   onClick={onOpenShowcase}
-                  className="gold-glow-btn px-8 py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] font-semibold text-champagne-100 flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto gold-glow-btn px-6 sm:px-8 py-3 sm:py-3.5 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-[0.18em] sm:tracking-[0.2em] font-semibold text-champagne-100 flex items-center justify-center gap-2 shadow-lg"
                 >
                   <span>Explore Collection</span>
                   <ArrowUpRight className="w-4 h-4 text-gold-400" />
@@ -81,10 +81,28 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
 
                 <button
                   onClick={onOpenBooking}
-                  className="px-8 py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] font-medium text-white/85 border border-white/20 hover:border-gold-400 hover:text-champagne-200 bg-white/5 backdrop-blur-md transition-all duration-300"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium text-white/85 border border-white/20 hover:border-gold-400 hover:text-champagne-200 bg-white/5 backdrop-blur-md transition-all duration-300"
                 >
                   Book a Private Viewing
                 </button>
+              </div>
+
+              {/* Mobile and Desktop Touch-friendly Scroll Cue */}
+              <div
+                onClick={() => {
+                  const target = document.getElementById('about');
+                  if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    window.scrollBy({ top: window.innerHeight * 1.5, behavior: 'smooth' });
+                  }
+                }}
+                className="mt-5 sm:mt-8 flex flex-col items-center gap-1 text-white/50 hover:text-champagne-200 transition-colors cursor-pointer group select-none"
+              >
+                <span className="text-[9px] sm:text-[10px] font-mono tracking-[0.3em] uppercase text-gold-400/80 group-hover:text-gold-300">
+                  Scroll to Explore
+                </span>
+                <ChevronDown className="w-4 h-4 text-gold-400/80 group-hover:text-gold-300 animate-bounce" />
               </div>
             </div>
           );
@@ -205,17 +223,17 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
                 transform: `translateY(${y}px)`,
                 transition: 'opacity 0.25s ease-out, transform 0.25s ease-out'
               }}
-              className="text-center max-w-3xl mx-auto flex flex-col items-center pointer-events-auto bg-espresso-950/70 backdrop-blur-2xl p-8 sm:p-12 rounded-3xl border border-gold-500/30 shadow-2xl shadow-gold-950/30"
+              className="text-center max-w-3xl mx-auto flex flex-col items-center pointer-events-auto bg-espresso-950/70 backdrop-blur-2xl p-5 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl border border-gold-500/30 shadow-2xl shadow-gold-950/30"
             >
-              <span className="text-[11px] tracking-[0.4em] text-gold-400 uppercase font-mono mb-3">
+              <span className="text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] text-gold-400 uppercase font-mono mb-2 sm:mb-3">
                 THE BRIDAL EDIT
               </span>
 
-              <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl font-light tracking-[0.06em] text-white mb-3">
+              <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.04em] sm:tracking-[0.06em] text-white mb-2 sm:mb-3">
                 Timeless as Your Promise
               </h2>
 
-              <p className="font-cormorant italic text-xl sm:text-2xl text-champagne-300 font-normal mb-5">
+              <p className="font-cormorant italic text-lg sm:text-2xl text-champagne-300 font-normal mb-3 sm:mb-5">
                 Designed to be worn today, and inherited tomorrow.
               </p>
 

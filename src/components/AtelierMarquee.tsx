@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, ArrowUpRight, Award, Gem, ShieldCheck, X } from 'lucide-react';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 
 interface MarqueeItem {
   id: string;
@@ -73,6 +74,7 @@ const MARQUEE_PIECES: MarqueeItem[] = [
 
 export const AtelierMarquee: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }) => {
   const [selectedItem, setSelectedItem] = useState<MarqueeItem | null>(null);
+  useBodyScrollLock(Boolean(selectedItem));
 
   // Duplicate for infinite seamless marquee
   const row1 = [...MARQUEE_PIECES, ...MARQUEE_PIECES];
@@ -192,8 +194,14 @@ export const AtelierMarquee: React.FC<{ onOpenBooking: () => void }> = ({ onOpen
 
       {/* Lightbox / High-Res Dossier Modal */}
       {selectedItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-2xl animate-fadeIn">
-          <div className="relative w-full max-w-3xl bg-espresso-950 rounded-2xl sm:rounded-3xl border border-gold-500/40 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+        <div
+          onClick={() => setSelectedItem(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-2xl animate-fadeIn overscroll-contain"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-3xl bg-espresso-950 rounded-2xl sm:rounded-3xl border border-gold-500/40 shadow-2xl overflow-hidden flex flex-col max-h-[90vh] overscroll-contain"
+          >
             <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gold-500/15 bg-espresso-900/40">
               <div>
                 <span className="text-[9px] font-mono tracking-[0.35em] text-gold-400 uppercase block">

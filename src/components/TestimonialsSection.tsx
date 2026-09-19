@@ -3,9 +3,11 @@ import { TESTIMONIALS } from '../data/jewelleryData';
 import { TestimonialItem } from '../types';
 import { Quote, Star, X, Sparkles, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 
 export const TestimonialsSection: React.FC = () => {
   const [selectedTestimonial, setSelectedTestimonial] = useState<TestimonialItem | null>(null);
+  useBodyScrollLock(Boolean(selectedTestimonial));
 
   const handleNext = () => {
     if (!selectedTestimonial) return;

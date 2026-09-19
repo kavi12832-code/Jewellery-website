@@ -50,11 +50,33 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
   const totalFrames = activeMeta.totalFrames || 240;
   const folder = activeMeta.folder;
 
-  // Preload frames for currently active category
+  // Helper to get exact frame or closest available loaded frame for 360 rotation
+  const getRenderImage = useCallback((targetIdx: number): HTMLImageElement | null => {
+    const currentImages = imagesCacheRef.current[normalizedCategory];
+    if (!currentImages) return null;
+
+    const direct = currentImages[targetIdx];
+    if (direct && direct.complete && direct.naturalWidth > 0) return direct;
+
+    // Search outward for closest available frame
+    for (let offset = 1; offset < totalFrames; offset++) {
+      const left = (targetIdx - offset + totalFrames) % totalFrames;
+      const imgL = currentImages[left];
+      if (imgL && imgL.complete && imgL.naturalWidth > 0) return imgL;
+
+      const right = (targetIdx + offset) % totalFrames;
+      const imgR = currentImages[right];
+      if (imgR && imgR.complete && imgR.naturalWidth > 0) return imgR;
+    }
+    return null;
+  }, [normalizedCategory, totalFrames]);
+
+  // Progressive Preloading: Frame 0 displays immediately, rest stream in background
   useEffect(() => {
+    let active = true;
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    if (imagesCacheRef.current[normalizedCategory] && imagesCacheRef.current[normalizedCategory].length === totalFrames) {
+    if (imagesCacheRef.current[normalizedCategory] && imagesCacheRef.current[normalizedCategory][0]?.complete) {
       setIsLoaded(true);
       setLoadProgress(100);
       setCurrentFrame(0);
@@ -65,34 +87,92 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
     setLoadProgress(0);
     setCurrentFrame(0);
 
+    const images: HTMLImageElement[] = new Array(totalFrames);
+    imagesCacheRef.current[normalizedCategory] = images;
+
     let loadedCount = 0;
-    const images: HTMLImageElement[] = [];
+    const onSingleImageLoad = () => {
+      if (!active) return;
+      loadedCount++;
+      const prog = Math.round((loadedCount / totalFrames) * 100);
+      setLoadProgress(prog);
+    };
 
-    for (let i = 0; i < totalFrames; i++) {
-      const img = new Image();
-      const frameNum = String(i + 1).padStart(3, '0');
-      img.src = `${folder}/ezgif-frame-${frameNum}.jpg`;
-
-      img.onload = () => {
-        loadedCount++;
-        const prog = Math.round((loadedCount / totalFrames) * 100);
-        setLoadProgress(prog);
-        if (loadedCount >= totalFrames) {
-          imagesCacheRef.current[normalizedCategory] = images;
-          setIsLoaded(true);
+    const loadImage = (index: number): Promise<void> => {
+      return new Promise((resolve) => {
+        if (!active || images[index]) {
+          resolve();
+          return;
         }
-      };
+        const img = new Image();
+        const frameNum = String(index + 1).padStart(3, '0');
+        img.src = `${folder}/ezgif-frame-${frameNum}.jpg`;
+        images[index] = img;
+        img.onload = () => {
+          onSingleImageLoad();
+          resolve();
+        };
+        img.onerror = () => {
+          onSingleImageLoad();
+          resolve();
+        };
+      });
+    };
 
-      img.onerror = () => {
-        loadedCount++;
-        if (loadedCount >= totalFrames) {
-          imagesCacheRef.current[normalizedCategory] = images;
-          setIsLoaded(true);
+    // Step 1: Load Frame 0 immediately for instant display in <50ms
+    loadImage(0).then(() => {
+      if (!active) return;
+      setIsLoaded(true); // Instant removal of loading overlay!
+
+      // Step 2: Load key 360 turntable milestone angles (every 8th frame: 30 angles total)
+      const milestoneIndices: number[] = [];
+      for (let i = 8; i < totalFrames; i += 8) {
+        milestoneIndices.push(i);
+      }
+      if (!milestoneIndices.includes(totalFrames - 1)) {
+        milestoneIndices.push(totalFrames - 1);
+      }
+
+      Promise.all(milestoneIndices.map((idx) => loadImage(idx))).then(() => {
+        if (!active) return;
+
+        // Step 3: Stream the remaining in-between frames in small batches
+        const remainingIndices: number[] = [];
+        for (let i = 0; i < totalFrames; i++) {
+          if (!images[i]) {
+            remainingIndices.push(i);
+          }
         }
-      };
 
-      images.push(img);
-    }
+        let currentBatch = 0;
+        const batchSize = 8;
+
+        const loadNextBatch = () => {
+          if (!active || currentBatch >= remainingIndices.length) return;
+          const batch = remainingIndices.slice(currentBatch, currentBatch + batchSize);
+          currentBatch += batchSize;
+          Promise.all(batch.map((idx) => loadImage(idx))).then(() => {
+            if (active && currentBatch < remainingIndices.length) {
+              setTimeout(loadNextBatch, 35);
+            }
+          });
+        };
+
+        loadNextBatch();
+      });
+    });
+
+    // Fallback: Ensure 360 viewer is never blocked on mobile networks
+    const fallbackTimer = setTimeout(() => {
+      if (active) {
+        setIsLoaded(true);
+      }
+    }, 150);
+
+    return () => {
+      active = false;
+      clearTimeout(fallbackTimer);
+    };
   }, [normalizedCategory, folder, totalFrames]);
 
   // Draw frame on canvas with high DPI sharpness
@@ -102,11 +182,8 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
     const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
 
-    const currentImages = imagesCacheRef.current[normalizedCategory];
-    if (!currentImages || !currentImages[frameIdx]) return;
-
-    const img = currentImages[frameIdx];
-    if (!img.complete || img.naturalWidth === 0) return;
+    const img = getRenderImage(frameIdx);
+    if (!img) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const width = canvas.clientWidth;
@@ -129,7 +206,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
 
     ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
     ctx.restore();
-  }, [zoomLevel, normalizedCategory]);
+  }, [zoomLevel, getRenderImage]);
 
   useEffect(() => {
     if (isLoaded) {

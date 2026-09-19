@@ -1,6 +1,7 @@
 import React, { useState, MouseEvent } from 'react';
 import { X, Clock, Check, ArrowRight, ZoomIn } from 'lucide-react';
 import { JewelleryPiece } from '../types';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 
 interface ProductDetailModalProps {
   piece: JewelleryPiece | null;
@@ -16,6 +17,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   const [zoomPos, setZoomPos] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
   const [isZooming, setIsZooming] = useState<boolean>(false);
 
+  // Freeze background scrolling on desktop and mobile when viewing a jewel
+  useBodyScrollLock(Boolean(piece));
+
   if (!piece) return null;
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -26,8 +30,14 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-2xl animate-fadeIn">
-      <div className="relative w-full max-w-4xl bg-espresso-950 rounded-2xl sm:rounded-3xl border border-gold-500/35 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-2xl animate-fadeIn overscroll-contain"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-4xl bg-espresso-950 rounded-2xl sm:rounded-3xl border border-gold-500/35 shadow-2xl overflow-hidden flex flex-col max-h-[90vh] overscroll-contain"
+      >
         {/* Header */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gold-500/15 bg-espresso-900/40">
           <div>

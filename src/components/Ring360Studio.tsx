@@ -143,16 +143,38 @@ export const Ring360Studio: React.FC<MultiCategoryStudioProps> = ({
   const activeConfig = CATEGORY_CONFIGS[selectedCategoryTab];
   const totalFrames = activeConfig?.totalFrames || 240;
 
-  // Preload frames for currently selected category
+  // Helper to get exact frame or closest available loaded frame
+  const getRenderImage = useCallback((targetIdx: number): HTMLImageElement | null => {
+    const currentImages = imagesCacheRef.current[selectedCategoryTab];
+    if (!currentImages) return null;
+
+    const direct = currentImages[targetIdx];
+    if (direct && direct.complete && direct.naturalWidth > 0) return direct;
+
+    // Search outward for closest available frame
+    for (let offset = 1; offset < totalFrames; offset++) {
+      const left = (targetIdx - offset + totalFrames) % totalFrames;
+      const imgL = currentImages[left];
+      if (imgL && imgL.complete && imgL.naturalWidth > 0) return imgL;
+
+      const right = (targetIdx + offset) % totalFrames;
+      const imgR = currentImages[right];
+      if (imgR && imgR.complete && imgR.naturalWidth > 0) return imgR;
+    }
+    return null;
+  }, [selectedCategoryTab, totalFrames]);
+
+  // Preload frames for currently selected category with instant initial render
   useEffect(() => {
     if (!activeConfig) return;
 
+    let active = true;
     const currentTab = selectedCategoryTab;
     const folder = activeConfig.folder;
     const count = activeConfig.totalFrames;
 
     // Check if already cached
-    if (imagesCacheRef.current[currentTab] && imagesCacheRef.current[currentTab].length === count) {
+    if (imagesCacheRef.current[currentTab] && imagesCacheRef.current[currentTab][0]?.complete) {
       setIsLoaded(true);
       setLoadProgress(100);
       setCurrentFrame(0);
@@ -163,34 +185,92 @@ export const Ring360Studio: React.FC<MultiCategoryStudioProps> = ({
     setLoadProgress(0);
     setCurrentFrame(0);
 
+    const images: HTMLImageElement[] = new Array(count);
+    imagesCacheRef.current[currentTab] = images;
+
     let loadedCount = 0;
-    const images: HTMLImageElement[] = [];
+    const onSingleImageLoad = () => {
+      if (!active) return;
+      loadedCount++;
+      const prog = Math.round((loadedCount / count) * 100);
+      setLoadProgress(prog);
+    };
 
-    for (let i = 0; i < count; i++) {
-      const img = new Image();
-      const frameNum = String(i + 1).padStart(3, '0');
-      img.src = `${folder}/ezgif-frame-${frameNum}.jpg`;
-
-      img.onload = () => {
-        loadedCount++;
-        const prog = Math.round((loadedCount / count) * 100);
-        setLoadProgress(prog);
-        if (loadedCount >= count) {
-          imagesCacheRef.current[currentTab] = images;
-          setIsLoaded(true);
+    const loadImage = (index: number): Promise<void> => {
+      return new Promise((resolve) => {
+        if (!active || images[index]) {
+          resolve();
+          return;
         }
-      };
+        const img = new Image();
+        const frameNum = String(index + 1).padStart(3, '0');
+        img.src = `${folder}/ezgif-frame-${frameNum}.jpg`;
+        images[index] = img;
+        img.onload = () => {
+          onSingleImageLoad();
+          resolve();
+        };
+        img.onerror = () => {
+          onSingleImageLoad();
+          resolve();
+        };
+      });
+    };
 
-      img.onerror = () => {
-        loadedCount++;
-        if (loadedCount >= count) {
-          imagesCacheRef.current[currentTab] = images;
-          setIsLoaded(true);
+    // Step 1: Load Frame 0 immediately for instant display
+    loadImage(0).then(() => {
+      if (!active) return;
+      setIsLoaded(true);
+
+      // Step 2: Load key 360 milestone angles (every 8th frame)
+      const milestoneIndices: number[] = [];
+      for (let i = 8; i < count; i += 8) {
+        milestoneIndices.push(i);
+      }
+      if (!milestoneIndices.includes(count - 1)) {
+        milestoneIndices.push(count - 1);
+      }
+
+      Promise.all(milestoneIndices.map((idx) => loadImage(idx))).then(() => {
+        if (!active) return;
+
+        // Step 3: Stream the remaining in-between frames in small batches
+        const remainingIndices: number[] = [];
+        for (let i = 0; i < count; i++) {
+          if (!images[i]) {
+            remainingIndices.push(i);
+          }
         }
-      };
 
-      images.push(img);
-    }
+        let currentBatch = 0;
+        const batchSize = 8;
+
+        const loadNextBatch = () => {
+          if (!active || currentBatch >= remainingIndices.length) return;
+          const batch = remainingIndices.slice(currentBatch, currentBatch + batchSize);
+          currentBatch += batchSize;
+          Promise.all(batch.map((idx) => loadImage(idx))).then(() => {
+            if (active && currentBatch < remainingIndices.length) {
+              setTimeout(loadNextBatch, 35);
+            }
+          });
+        };
+
+        loadNextBatch();
+      });
+    });
+
+    // Fallback: Ensure 360 viewer is never blocked
+    const fallbackTimer = setTimeout(() => {
+      if (active) {
+        setIsLoaded(true);
+      }
+    }, 150);
+
+    return () => {
+      active = false;
+      clearTimeout(fallbackTimer);
+    };
   }, [selectedCategoryTab, activeConfig]);
 
   // Draw frame on canvas with high DPI sharpness
@@ -200,11 +280,8 @@ export const Ring360Studio: React.FC<MultiCategoryStudioProps> = ({
     const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
 
-    const currentImages = imagesCacheRef.current[selectedCategoryTab];
-    if (!currentImages || !currentImages[frameIdx]) return;
-
-    const img = currentImages[frameIdx];
-    if (!img.complete || img.naturalWidth === 0) return;
+    const img = getRenderImage(frameIdx);
+    if (!img) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const width = canvas.clientWidth;

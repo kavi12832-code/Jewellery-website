@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronRight } from 'lucide-react';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -15,6 +16,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useBodyScrollLock(mobileMenuOpen);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -132,7 +135,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-espresso-950/98 backdrop-blur-2xl lg:hidden flex flex-col justify-between pt-20 sm:pt-24 pb-8 sm:pb-10 px-6 sm:px-8 overflow-y-auto max-h-screen transition-all duration-500">
+        <div className="fixed inset-0 z-40 bg-espresso-950/98 backdrop-blur-2xl lg:hidden flex flex-col justify-between pt-20 sm:pt-24 pb-8 sm:pb-10 px-6 sm:px-8 overflow-y-auto max-h-screen transition-all duration-500 overscroll-contain">
           <div className="space-y-4 sm:space-y-5 flex flex-col items-center text-center mt-4 sm:mt-6">
             <span className="text-[10px] tracking-[0.4em] text-gold-500 uppercase font-mono">Bizjewellery Menu</span>
             {navLinks.map((item) => (

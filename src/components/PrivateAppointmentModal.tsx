@@ -3,6 +3,7 @@ import { X, Calendar, Clock, MapPin, CheckCircle2, Shield, User, Mail, Phone, Ar
 import { BOUTIQUES } from '../data/jewelleryData';
 import { BookingFormData } from '../types';
 import confetti from 'canvas-confetti';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 
 interface PrivateAppointmentModalProps {
   isOpen: boolean;
@@ -13,6 +14,8 @@ export const PrivateAppointmentModal: React.FC<PrivateAppointmentModalProps> = (
   isOpen,
   onClose
 }) => {
+  useBodyScrollLock(isOpen);
+
   const [formData, setFormData] = useState<BookingFormData>({
     salutation: 'Ms.',
     fullName: '',
@@ -56,9 +59,15 @@ export const PrivateAppointmentModal: React.FC<PrivateAppointmentModalProps> = (
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl animate-fadeIn">
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl animate-fadeIn overscroll-contain"
+    >
       {/* Modal Container */}
-      <div className="relative w-full max-w-2xl bg-espresso-950 rounded-2xl sm:rounded-3xl border border-gold-500/35 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-2xl bg-espresso-950 rounded-2xl sm:rounded-3xl border border-gold-500/35 shadow-2xl overflow-hidden flex flex-col max-h-[90vh] overscroll-contain"
+      >
         {/* Modal Header */}
         <div className="flex items-center justify-between p-4 sm:p-6 lg:p-8 border-b border-gold-500/15 bg-espresso-900/40">
           <div>
