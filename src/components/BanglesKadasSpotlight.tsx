@@ -54,22 +54,22 @@ export const BanglesKadasSpotlight: React.FC<BanglesKadasSpotlightProps> = ({
   const current = bangleVariations[activeTab];
 
   return (
-    <section id="bangles-kadas" className="py-12 sm:py-16 px-6 sm:px-12 bg-gradient-to-b from-[#0D0906] via-[#140D09] to-[#0A0706] relative overflow-hidden border-t border-gold-500/20">
+    <section id="bangles-kadas" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0D0906] via-[#140D09] to-[#0A0706] relative overflow-hidden border-t border-gold-500/20">
       {/* Ambient background glows */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-amber-900/10 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-gold-500/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-gold-500/30 bg-espresso-900/80 backdrop-blur-md mb-2.5 shadow-gold-glow">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 px-2">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 rounded-full border border-gold-500/30 bg-espresso-900/80 backdrop-blur-md mb-2.5 shadow-gold-glow">
             <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-            <span className="text-[10px] tracking-[0.35em] text-champagne-300 uppercase font-mono">
+            <span className="text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.35em] text-champagne-300 uppercase font-mono">
               HEIRLOOM ARM ADORNMENTS
             </span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-4xl font-light text-white tracking-wide mb-2.5">
+          <h2 className="font-serif text-2xl sm:text-4xl font-light text-white tracking-wide mb-2 sm:mb-2.5">
             Bangles & Kadas Collection
           </h2>
 
@@ -79,13 +79,13 @@ export const BanglesKadasSpotlight: React.FC<BanglesKadasSpotlightProps> = ({
         </div>
 
         {/* Interactive Spotlight Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center bg-espresso-950/70 border border-gold-500/25 rounded-3xl p-5 sm:p-7 shadow-2xl backdrop-blur-md relative overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center bg-espresso-950/70 border border-gold-500/25 rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl backdrop-blur-md relative overflow-hidden">
           {/* Subtle gold line accent on top */}
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
 
           {/* Left: Product Imagery & 360 Trigger */}
           <div className="lg:col-span-6 flex flex-col items-center">
-            <div className="relative group w-full aspect-[4/3] max-w-[480px] rounded-2xl overflow-hidden bg-[#070504] border border-gold-500/30 flex items-center justify-center p-5 shadow-2xl">
+            <div className="relative group w-full aspect-[4/3] max-w-[480px] rounded-2xl overflow-hidden bg-[#070504] border border-gold-500/30 flex items-center justify-center p-4 sm:p-5 shadow-2xl">
               {/* Subtle Radial Glow */}
               <div className="absolute inset-0 bg-radial from-gold-500/10 via-transparent to-transparent pointer-events-none" />
 
@@ -98,14 +98,14 @@ export const BanglesKadasSpotlight: React.FC<BanglesKadasSpotlightProps> = ({
               {/* 360 Badge Overlay */}
               <button
                 onClick={onExplore360}
-                className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-espresso-950/90 backdrop-blur-md border border-gold-400/50 text-gold-300 text-[10px] font-mono shadow-lg hover:bg-gold-500/20 hover:text-white transition-all group/btn"
+                className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-espresso-950/90 backdrop-blur-md border border-gold-400/50 text-gold-300 text-[9px] sm:text-[10px] font-mono shadow-lg hover:bg-gold-500/20 hover:text-white transition-all group/btn"
               >
-                <Rotate3d className="w-3.5 h-3.5 text-gold-400 animate-spin-slow" />
-                <span>360° TURNTABLE AVAILABLE</span>
+                <Rotate3d className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gold-400 animate-spin-slow" />
+                <span>360° TURNTABLE</span>
               </button>
 
               {/* Purity Stamp */}
-              <div className="absolute bottom-4 right-4 z-20 px-3 py-1 rounded-full bg-espresso-950/90 backdrop-blur-md border border-gold-500/30 text-[10px] font-mono text-champagne-300">
+              <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 px-2.5 sm:px-3 py-1 rounded-full bg-espresso-950/90 backdrop-blur-md border border-gold-500/30 text-[9px] sm:text-[10px] font-mono text-champagne-300">
                 BIS 916 HALLMARKED
               </div>
             </div>
@@ -126,12 +126,12 @@ export const BanglesKadasSpotlight: React.FC<BanglesKadasSpotlightProps> = ({
           {/* Right: Specs, Style Switcher & Booking */}
           <div className="lg:col-span-6 space-y-4 sm:space-y-5">
             {/* Style Selector Tabs */}
-            <div className="flex flex-wrap gap-2 border-b border-white/10 pb-3.5">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 border-b border-white/10 pb-3.5">
               {(['antique', 'ruby', 'diamond'] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 ${
+                  className={`px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 ${
                     activeTab === tab
                       ? 'bg-gradient-to-r from-gold-500 to-champagne-300 text-espresso-950 font-bold shadow-gold-glow scale-105'
                       : 'bg-espresso-900/60 border border-gold-500/20 text-white/70 hover:bg-[#FFF3DA] hover:text-[#1E120A] hover:border-[#D4AF37] hover:scale-105 shadow-md'
@@ -153,7 +153,7 @@ export const BanglesKadasSpotlight: React.FC<BanglesKadasSpotlightProps> = ({
               <h3 className="font-serif text-2xl sm:text-3xl text-white font-light mb-2">
                 {current.name}
               </h3>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
                 <span className="font-mono text-xl sm:text-2xl font-bold text-gold-300">
                   {current.price}
                 </span>
@@ -167,7 +167,7 @@ export const BanglesKadasSpotlight: React.FC<BanglesKadasSpotlightProps> = ({
             </div>
 
             {/* Spec Matrix */}
-            <div className="bg-espresso-900/60 backdrop-blur-md p-5 rounded-2xl border border-gold-500/20 space-y-2.5 text-xs font-mono">
+            <div className="bg-espresso-900/60 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gold-500/20 space-y-2.5 text-xs font-mono">
               <div className="flex justify-between border-b border-white/5 pb-2">
                 <span className="text-white/40">GOLD PURITY:</span>
                 <span className="text-gold-300 font-semibold">{current.purity}</span>
@@ -190,7 +190,7 @@ export const BanglesKadasSpotlight: React.FC<BanglesKadasSpotlightProps> = ({
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <button
                 onClick={onOpenBooking}
-                className="gold-glow-btn px-6 py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] text-champagne-100 font-bold flex items-center justify-center gap-2"
+                className="w-full sm:w-auto sm:flex-1 gold-glow-btn px-6 py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] text-champagne-100 font-bold flex items-center justify-center gap-2"
               >
                 <span>Reserve In Showroom</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -198,7 +198,7 @@ export const BanglesKadasSpotlight: React.FC<BanglesKadasSpotlightProps> = ({
 
               <button
                 onClick={onExplore360}
-                className="px-6 py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] border border-gold-500/40 bg-espresso-900/80 text-champagne-200 hover:text-white hover:border-gold-300 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto sm:flex-1 px-6 py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] border border-gold-500/40 bg-espresso-900/80 text-champagne-200 hover:text-white hover:border-gold-300 transition-all flex items-center justify-center gap-2"
               >
                 <Rotate3d className="w-3.5 h-3.5 text-gold-400" />
                 <span>View 360° Studio</span>

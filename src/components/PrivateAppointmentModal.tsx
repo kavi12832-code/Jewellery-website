@@ -56,23 +56,23 @@ export const PrivateAppointmentModal: React.FC<PrivateAppointmentModalProps> = (
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl animate-fadeIn">
       {/* Modal Container */}
-      <div className="relative w-full max-w-2xl bg-espresso-950 rounded-3xl border border-gold-500/35 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div className="relative w-full max-w-2xl bg-espresso-950 rounded-2xl sm:rounded-3xl border border-gold-500/35 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Modal Header */}
-        <div className="flex items-center justify-between p-6 sm:p-8 border-b border-gold-500/15 bg-espresso-900/40">
+        <div className="flex items-center justify-between p-4 sm:p-6 lg:p-8 border-b border-gold-500/15 bg-espresso-900/40">
           <div>
-            <span className="text-[10px] font-mono tracking-[0.4em] text-gold-400 uppercase block">
+            <span className="text-[9px] sm:text-[10px] font-mono tracking-[0.3em] sm:tracking-[0.4em] text-gold-400 uppercase block">
               BIZJEWELLERY · PRIVATE SALON
             </span>
-            <h3 className="font-serif text-2xl sm:text-3xl text-white font-light mt-1">
+            <h3 className="font-serif text-xl sm:text-2xl lg:text-3xl text-white font-light mt-0.5 sm:mt-1">
               Book a Private Viewing
             </h3>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 rounded-full text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-2 rounded-full text-white/50 hover:text-white hover:bg-white/10 transition-colors shrink-0"
             aria-label="Close booking modal"
           >
             <X className="w-5 h-5" />
@@ -80,7 +80,7 @@ export const PrivateAppointmentModal: React.FC<PrivateAppointmentModalProps> = (
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
+        <div className="p-4 sm:p-6 lg:p-8 overflow-y-auto space-y-5 sm:space-y-6">
           {isSubmitted ? (
             /* Confirmation Screen */
             <div className="text-center py-10 space-y-6 animate-fadeIn">
@@ -281,10 +281,10 @@ export const PrivateAppointmentModal: React.FC<PrivateAppointmentModalProps> = (
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full gold-glow-btn py-4 rounded-full text-xs font-mono uppercase tracking-[0.25em] text-champagne-100 font-bold shadow-2xl flex items-center justify-center gap-2"
+                  className="w-full gold-glow-btn py-3.5 sm:py-4 px-4 rounded-full text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] sm:tracking-[0.25em] text-champagne-100 font-bold shadow-2xl flex items-center justify-center gap-2 text-center"
                 >
                   <span>Request Private Viewing Reservation</span>
-                  <ArrowRight className="w-4 h-4 text-gold-400" />
+                  <ArrowRight className="w-4 h-4 text-gold-400 shrink-0" />
                 </button>
               </div>
             </form>

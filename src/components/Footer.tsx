@@ -14,13 +14,13 @@ export const Footer: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking 
   };
 
   return (
-    <footer className="bg-espresso-950 text-white border-t border-gold-500/20 pt-12 sm:pt-14 pb-8 sm:pb-10 px-6 sm:px-12 relative overflow-hidden">
+    <footer className="bg-espresso-950 text-white border-t border-gold-500/20 pt-12 sm:pt-14 pb-8 sm:pb-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background soft ambient vignette */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gold-500/5 rounded-full blur-[180px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 space-y-10 sm:space-y-12">
         {/* 5-Column Footer Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
           {/* Column 1 — Brand */}
           <div className="space-y-4 lg:col-span-1">
             <h3 className="font-serif text-2xl font-semibold tracking-wider text-white">
@@ -121,12 +121,12 @@ export const Footer: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking 
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-white/40 font-mono">
-          <div>
-            © 2026 Bizjewellery. All rights reserved. | <span className="hover:text-white cursor-pointer">Privacy Policy</span> | <span className="hover:text-white cursor-pointer">Terms of Service</span>
+        <div className="pt-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 text-xs text-white/40 font-mono text-center sm:text-left">
+          <div className="leading-relaxed">
+            © 2026 Bizjewellery. All rights reserved. <span className="hidden sm:inline">|</span> <span className="block sm:inline mt-1 sm:mt-0"><span className="hover:text-white cursor-pointer">Privacy Policy</span> | <span className="hover:text-white cursor-pointer">Terms of Service</span></span>
           </div>
 
-          <div className="flex items-center gap-6 text-[11px]">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-6 text-[11px]">
             <span className="flex items-center gap-1.5 text-gold-400/90">
               <ShieldCheck className="w-3.5 h-3.5" /> BIS Hallmarked
             </span>

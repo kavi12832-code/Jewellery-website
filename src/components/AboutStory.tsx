@@ -84,12 +84,12 @@ const AnimatedStatCard: React.FC<AnimatedStatCardProps> = ({ valueStr, label }) 
         startAnimation();
       }}
       onMouseLeave={() => setIsHovered(false)}
-      className="bg-espresso-900/60 backdrop-blur-xl p-6 sm:p-8 rounded-2xl border border-gold-500/20 hover:border-gold-400/60 hover:bg-espresso-900/90 hover:scale-[1.03] transition-all duration-300 shadow-xl text-center group cursor-pointer"
+      className="bg-espresso-900/60 backdrop-blur-xl p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-gold-500/20 hover:border-gold-400/60 hover:bg-espresso-900/90 hover:scale-[1.03] transition-all duration-300 shadow-xl text-center group cursor-pointer flex flex-col justify-center"
     >
-      <div className="font-mono text-3xl sm:text-4xl font-bold text-gold-300 group-hover:text-champagne-200 transition-colors mb-2 select-none tracking-tight">
+      <div className="font-mono text-2xl sm:text-3xl md:text-4xl font-bold text-gold-300 group-hover:text-champagne-200 transition-colors mb-1.5 sm:mb-2 select-none tracking-tight">
         {formattedDisplay}
       </div>
-      <div className="text-xs sm:text-sm text-white/70 font-light group-hover:text-white/90 transition-colors">
+      <div className="text-[11px] sm:text-xs md:text-sm text-white/70 font-light group-hover:text-white/90 transition-colors leading-snug">
         {label}
       </div>
     </div>
@@ -98,30 +98,30 @@ const AnimatedStatCard: React.FC<AnimatedStatCardProps> = ({ valueStr, label }) 
 
 export const AboutStory: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking }) => {
   return (
-    <section id="about" className="py-12 sm:py-16 px-6 sm:px-12 bg-espresso-950 relative overflow-hidden border-t border-gold-500/15">
+    <section id="about" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-espresso-950 relative overflow-hidden border-t border-gold-500/15">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-10 -translate-y-1/2 w-96 h-96 bg-gold-500/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-ruby-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto relative z-10 text-center">
+      <div className="max-w-7xl mx-auto relative z-10 text-center">
         {/* Eyebrow */}
-        <span className="text-[11px] font-mono tracking-[0.4em] text-gold-400 uppercase block mb-2">
+        <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.35em] sm:tracking-[0.4em] text-gold-400 uppercase block mb-2">
           HERITAGE & VISION
         </span>
 
         {/* Section Title */}
-        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-wide mb-4">
+        <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl font-light text-white tracking-wide mb-3 sm:mb-4 px-2">
           {BRAND_STORY.title}
         </h2>
 
         {/* Body Copy */}
-        <div className="max-w-3xl mx-auto space-y-4 text-sm sm:text-base text-white/75 font-light leading-relaxed mb-8 sm:mb-10">
+        <div className="max-w-3xl mx-auto space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-base text-white/75 font-light leading-relaxed mb-8 sm:mb-10 px-2">
           <p>{BRAND_STORY.paragraph1}</p>
           <p>{BRAND_STORY.paragraph2}</p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5 max-w-4xl mx-auto">
           {BRAND_STORY.stats.map((stat, i) => (
             <AnimatedStatCard key={i} valueStr={stat.value} label={stat.label} />
           ))}

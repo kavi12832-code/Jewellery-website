@@ -325,7 +325,7 @@ export const ScrollyCanvas: React.FC<ScrollyCanvasProps> = ({
             </div>
             
             <h3 className="font-serif tracking-[0.25em] uppercase text-xl text-white mb-2 font-light">
-              Bizjewellery
+              BIZJEWELLERY
             </h3>
             
             <p className="font-cormorant italic text-base text-champagne-200/80 mb-4 tracking-wider">

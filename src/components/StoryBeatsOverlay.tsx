@@ -5,7 +5,7 @@ interface StoryBeatsOverlayProps {
   progress: number; // 0 to 1
   onOpenBooking: () => void;
   onOpenShowcase: () => void;
-  onSelectChapter: (progress: number) => void;
+  onSelectChapter?: (progress: number) => void;
 }
 
 export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
@@ -20,7 +20,7 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
     if (progress < start - 0.02 || progress > end + 0.02) return 0;
 
     if (progress >= start && progress <= end) {
-      if (progress < start + fadeInWindow) {
+      if (start > 0 && progress < start + fadeInWindow) {
         return (progress - start) / fadeInWindow;
       }
       if (progress > end - fadeOutWindow && end < 1.0) {
@@ -70,7 +70,6 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
                 Using gold and gemstones sourced with the same care as generations before. For over three decades, Bizjewellery has been synonymous with fine craftsmanship and timeless design.
               </p>
 
-              {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
                 <button
                   onClick={onOpenShowcase}
@@ -107,7 +106,6 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
             >
               <div className="max-w-md text-left bg-espresso-950/70 backdrop-blur-xl p-5 sm:p-6 rounded-2xl border border-gold-500/20 shadow-2xl shadow-black/80 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-16 h-[2px] bg-gradient-to-r from-gold-500 to-transparent" />
-
                 <h2 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide leading-tight mb-2.5">
                   The Art Behind Every Piece
                 </h2>
@@ -140,7 +138,6 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
             >
               <div className="max-w-md text-left bg-espresso-950/70 backdrop-blur-xl p-5 sm:p-6 rounded-2xl border border-gold-500/20 shadow-2xl shadow-black/80 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-20 h-[2px] bg-gradient-to-l from-gold-500 to-transparent" />
-
                 <h2 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide leading-tight mb-2.5">
                   Certified Gemstones
                 </h2>
@@ -148,15 +145,15 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
                 <div className="space-y-1.5 text-xs text-white/75 font-light leading-relaxed">
                   <p className="flex items-start gap-2">
                     <span className="text-gold-400 font-bold">•</span>
-                    Each gemstone individually selected for clarity and fire.
+                    <span>Each gemstone individually selected for clarity and fire.</span>
                   </p>
                   <p className="flex items-start gap-2">
                     <span className="text-gold-400 font-bold">•</span>
-                    Set with precision taught over generations.
+                    <span>Set with precision taught over generations.</span>
                   </p>
                   <p className="flex items-start gap-2">
                     <span className="text-gold-400 font-bold">•</span>
-                    100% certified authentic natural stones.
+                    <span>100% certified authentic natural stones.</span>
                   </p>
                 </div>
               </div>
@@ -180,7 +177,6 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
             >
               <div className="max-w-md text-left bg-espresso-950/70 backdrop-blur-xl p-5 sm:p-6 rounded-2xl border border-gold-500/20 shadow-2xl shadow-black/80 relative">
                 <div className="absolute top-0 left-0 w-16 h-[2px] bg-gradient-to-r from-gold-500 to-transparent" />
-
                 <h2 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide leading-tight mb-2.5">
                   Polished for Every Light
                 </h2>

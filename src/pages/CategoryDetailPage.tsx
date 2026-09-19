@@ -235,7 +235,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
   });
 
   return (
-    <div className="min-h-screen bg-[#0D0906] pt-20 sm:pt-24 pb-16 px-4 sm:px-8 lg:px-12 relative overflow-hidden">
+    <div className="min-h-screen bg-[#0D0906] pt-20 sm:pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gold-500/5 rounded-full blur-[180px] pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-amber-900/10 rounded-full blur-[160px] pointer-events-none" />
@@ -251,10 +251,10 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
         </div>
 
         {/* Category Switcher Pill Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-8 pb-4 border-b border-white/10">
+        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 mb-8 pb-4 border-b border-white/10">
           <Link
             to="/collections"
-            className="px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider bg-espresso-900/70 border border-gold-500/20 text-white/70 hover:text-white hover:border-gold-400/50 transition-all"
+            className="px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-wider bg-espresso-900/70 border border-gold-500/20 text-white/70 hover:text-white hover:border-gold-400/50 transition-all"
           >
             ← All Collections
           </Link>
@@ -265,7 +265,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
                 navigate(`/collections/${cat.slug}`);
                 setIsPlaying(true);
               }}
-              className={`px-3.5 sm:px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
+              className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
                 normalizedCategory === cat.slug
                   ? 'bg-gradient-to-r from-gold-500 to-champagne-300 text-espresso-950 font-bold shadow-gold-glow scale-105'
                   : 'bg-espresso-900/70 border border-gold-500/20 text-white/70 hover:text-white hover:border-gold-400/50'
@@ -279,12 +279,12 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
 
         {/* Section 1: 360° Interactive Viewer Header & Stage */}
         <div className="mb-14 sm:mb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center bg-espresso-950/70 rounded-3xl border border-gold-500/25 p-5 sm:p-8 shadow-2xl backdrop-blur-md relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center bg-espresso-950/70 rounded-2xl sm:rounded-3xl border border-gold-500/25 p-4 sm:p-7 lg:p-8 shadow-2xl backdrop-blur-md relative overflow-hidden">
             {/* Subtle top gold accent line */}
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
 
             {/* Left: 360 Turntable Stage */}
-            <div className="lg:col-span-7 flex flex-col items-center">
+            <div className="lg:col-span-7 flex flex-col items-center w-full">
               <div
                 ref={containerRef}
                 onMouseDown={handleMouseDown}
@@ -294,7 +294,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
-                className={`relative w-full aspect-square max-w-[340px] sm:max-w-[390px] max-h-[340px] sm:max-h-[390px] rounded-2xl overflow-hidden border border-gold-500/30 bg-[#0F0B09] shadow-[0_15px_40px_rgba(0,0,0,0.85)] select-none transition-all duration-300 ${
+                className={`relative w-full aspect-square max-w-[300px] sm:max-w-[390px] rounded-2xl overflow-hidden border border-gold-500/30 bg-[#0F0B09] shadow-[0_15px_40px_rgba(0,0,0,0.85)] select-none transition-all duration-300 ${
                   isDragging ? 'cursor-grabbing border-gold-400' : 'cursor-grab hover:border-gold-400/60'
                 }`}
               >
@@ -318,60 +318,60 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
                 )}
 
                 {/* 360° Angle Degree Tracker */}
-                <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-espresso-950/80 backdrop-blur-md border border-gold-500/30 text-gold-300 text-[10px] font-mono shadow-md">
+                <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-espresso-950/80 backdrop-blur-md border border-gold-500/30 text-gold-300 text-[10px] font-mono shadow-md">
                   <Compass className="w-3 h-3 text-gold-400 animate-spin-slow" />
                   <span>{currentDegrees}° ANGLE</span>
                 </div>
 
                 {/* Drag Guidance Hint */}
-                <div className="absolute bottom-4 right-4 z-20 pointer-events-none hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-mono text-white/60 border border-white/10">
+                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 pointer-events-none hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-mono text-white/60 border border-white/10">
                   <span>↔ Drag to spin 360°</span>
                 </div>
               </div>
 
               {/* Turntable Controls Bar */}
-              <div className="flex items-center gap-3 mt-4 bg-espresso-950/80 backdrop-blur-md px-5 py-2 rounded-full border border-gold-500/20 shadow-xl">
+              <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-3 mt-4 bg-espresso-950/80 backdrop-blur-md px-3 sm:px-5 py-1.5 sm:py-2 rounded-full border border-gold-500/20 shadow-xl max-w-full">
                 <button
                   onClick={() => setIsPlaying(!isPlaying)}
-                  className="p-1.5 rounded-full text-champagne-300 hover:text-white transition-colors"
+                  className="p-1 sm:p-1.5 rounded-full text-champagne-300 hover:text-white transition-colors"
                   title={isPlaying ? 'Pause Rotation' : 'Play 360° Spin'}
                 >
-                  {isPlaying ? <Pause className="w-4 h-4 text-gold-400" /> : <Play className="w-4 h-4 text-emerald-400" />}
+                  {isPlaying ? <Pause className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gold-400" /> : <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />}
                 </button>
                 <div className="h-3.5 w-[1px] bg-white/10" />
                 <button
                   onClick={() => setZoomLevel((prev) => Math.max(1, prev - 0.2))}
-                  className="p-1.5 text-champagne-300 hover:text-white transition-colors"
+                  className="p-1 sm:p-1.5 text-champagne-300 hover:text-white transition-colors"
                   title="Zoom Out"
                 >
-                  <ZoomOut className="w-4 h-4" />
+                  <ZoomOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
-                <span className="text-[11px] font-mono text-white/70 min-w-9 text-center">
+                <span className="text-[10px] sm:text-[11px] font-mono text-white/70 min-w-8 text-center">
                   {Math.round(zoomLevel * 100)}%
                 </span>
                 <button
                   onClick={() => setZoomLevel((prev) => Math.min(1.6, prev + 0.2))}
-                  className="p-1.5 text-champagne-300 hover:text-white transition-colors"
+                  className="p-1 sm:p-1.5 text-champagne-300 hover:text-white transition-colors"
                   title="Zoom In"
                 >
-                  <ZoomIn className="w-4 h-4" />
+                  <ZoomIn className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
                 <div className="h-3.5 w-[1px] bg-white/10" />
                 <button
                   onClick={() => jumpToAngle(0)}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-espresso-900 text-gold-300/80 hover:text-gold-200"
+                  className="text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded bg-espresso-900 text-gold-300/80 hover:text-gold-200"
                 >
                   0°
                 </button>
                 <button
                   onClick={() => jumpToAngle(Math.round(totalFrames * 0.25))}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-espresso-900 text-gold-300/80 hover:text-gold-200"
+                  className="text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded bg-espresso-900 text-gold-300/80 hover:text-gold-200"
                 >
                   90°
                 </button>
                 <button
                   onClick={() => jumpToAngle(Math.round(totalFrames * 0.5))}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-espresso-900 text-gold-300/80 hover:text-gold-200"
+                  className="text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded bg-espresso-900 text-gold-300/80 hover:text-gold-200"
                 >
                   180°
                 </button>
@@ -456,32 +456,34 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
               <div
                 key={piece.id}
                 onClick={() => onSelectPiece(piece)}
-                className="group bg-espresso-950/80 rounded-2xl border border-gold-500/20 hover:border-gold-400/60 p-5 transition-all duration-500 cursor-pointer shadow-xl hover:shadow-gold-glow flex flex-col justify-between hover:-translate-y-1"
+                className="group bg-espresso-950/80 rounded-2xl border border-gold-500/20 hover:border-gold-400/60 p-5 transition-all duration-500 cursor-pointer shadow-xl hover:shadow-gold-glow h-full flex flex-col justify-between hover:-translate-y-1"
               >
-                {/* Product Image Stage */}
-                <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#070504] mb-4 flex items-center justify-center p-4 border border-gold-500/15">
-                  <div className="absolute inset-0 bg-radial from-gold-500/10 via-transparent to-transparent pointer-events-none" />
-                  <img
-                    src={piece.image}
-                    alt={piece.name}
-                    className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute top-3 right-3 p-1.5 rounded-full bg-espresso-950/80 text-gold-300/80 group-hover:text-gold-300 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Eye className="w-3.5 h-3.5" />
+                <div className="flex-1 flex flex-col">
+                  {/* Product Image Stage */}
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#070504] mb-4 flex items-center justify-center p-4 border border-gold-500/15">
+                    <div className="absolute inset-0 bg-radial from-gold-500/10 via-transparent to-transparent pointer-events-none" />
+                    <img
+                      src={piece.image}
+                      alt={piece.name}
+                      className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute top-3 right-3 p-1.5 rounded-full bg-espresso-950/80 text-gold-300/80 group-hover:text-gold-300 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Eye className="w-3.5 h-3.5" />
+                    </div>
                   </div>
-                </div>
 
-                {/* Details */}
-                <div className="space-y-1.5 mb-3">
-                  <span className="text-[10px] font-mono text-gold-400 uppercase tracking-widest block">
-                    {piece.metal}
-                  </span>
-                  <h4 className="font-serif text-lg text-white font-medium group-hover:text-champagne-200 transition-colors truncate">
-                    {piece.name}
-                  </h4>
-                  <p className="text-xs text-white/50 font-light truncate">
-                    {piece.gemstone}
-                  </p>
+                  {/* Details */}
+                  <div className="space-y-1.5 mb-3 flex-1">
+                    <span className="text-[10px] font-mono text-gold-400 uppercase tracking-widest block">
+                      {piece.metal}
+                    </span>
+                    <h4 className="font-serif text-lg text-white font-medium group-hover:text-champagne-200 transition-colors truncate">
+                      {piece.name}
+                    </h4>
+                    <p className="text-xs text-white/50 font-light truncate">
+                      {piece.gemstone}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Price & Action */}

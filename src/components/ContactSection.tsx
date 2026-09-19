@@ -18,7 +18,7 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-12 sm:py-16 px-6 sm:px-12 bg-[#0D0906] relative overflow-hidden border-t border-gold-500/15">
+    <section id="contact" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-[#0D0906] relative overflow-hidden border-t border-gold-500/15">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
@@ -35,7 +35,7 @@ export const ContactSection: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
           {/* Showroom Information Card */}
-          <div className="lg:col-span-5 bg-espresso-950/80 p-6 sm:p-8 rounded-3xl border border-gold-500/20 space-y-6 shadow-2xl">
+          <div className="lg:col-span-5 bg-espresso-950/80 p-5 sm:p-7 lg:p-8 rounded-2xl sm:rounded-3xl border border-gold-500/20 space-y-6 shadow-2xl">
             <div>
               <h3 className="font-serif text-2xl text-white font-light mb-2">
                 Chennai Flagship Showroom
@@ -62,7 +62,7 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-white/40 block text-[10px] font-mono uppercase">TELEPHONE</span>
-                  <a href={`tel:${STORE_LOCATION.phone}`} className="text-champagne-200 hover:text-gold-300 transition-colors">
+                  <a href={`tel:${STORE_LOCATION.phone}`} className="text-champagne-200 hover:text-gold-300 transition-colors break-words">
                     {STORE_LOCATION.phone}
                   </a>
                 </div>
@@ -74,7 +74,7 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-white/40 block text-[10px] font-mono uppercase">DIRECT EMAIL</span>
-                  <a href={`mailto:${STORE_LOCATION.email}`} className="text-champagne-200 hover:text-gold-300 transition-colors">
+                  <a href={`mailto:${STORE_LOCATION.email}`} className="text-champagne-200 hover:text-gold-300 transition-colors break-all">
                     {STORE_LOCATION.email}
                   </a>
                 </div>
@@ -91,13 +91,13 @@ export const ContactSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-white/10 text-xs font-mono text-gold-400/80">
+            <div className="pt-4 border-t border-white/10 text-xs font-mono text-gold-400/80 break-words">
               BIS Hallmarked | 100% Certified Natural Gemstones
             </div>
           </div>
 
           {/* Contact Inquiry Form */}
-          <div className="lg:col-span-7 bg-espresso-950/80 p-6 sm:p-8 rounded-3xl border border-gold-500/25 shadow-2xl">
+          <div className="lg:col-span-7 bg-espresso-950/80 p-5 sm:p-7 lg:p-8 rounded-2xl sm:rounded-3xl border border-gold-500/25 shadow-2xl">
             <h3 className="font-serif text-2xl text-white font-light mb-2">
               Send Us a Message
             </h3>

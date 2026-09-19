@@ -54,38 +54,38 @@ export const EarringsStudsSpotlight: React.FC<EarringsStudsSpotlightProps> = ({
   const current = earringVariations[activeTab];
 
   return (
-    <section id="earrings-studs" className="py-12 sm:py-16 px-6 sm:px-12 bg-gradient-to-b from-[#0A0706] via-[#140D09] to-[#0D0906] relative overflow-hidden border-t border-gold-500/20">
+    <section id="earrings-studs" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#0A0706] via-[#140D09] to-[#0D0906] relative overflow-hidden border-t border-gold-500/20">
       {/* Ambient background glows */}
       <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-rose-900/10 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-[450px] h-[450px] bg-gold-500/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-gold-500/30 bg-espresso-900/80 backdrop-blur-md mb-3.5 shadow-gold-glow">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 px-2">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 rounded-full border border-gold-500/30 bg-espresso-900/80 backdrop-blur-md mb-2.5 sm:mb-3.5 shadow-gold-glow">
             <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-            <span className="text-[10px] tracking-[0.35em] text-champagne-300 uppercase font-mono">
+            <span className="text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.35em] text-champagne-300 uppercase font-mono">
               HERITAGE EAR ADORNMENTS
             </span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-5xl font-light text-white tracking-wide mb-4">
+          <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl font-light text-white tracking-wide mb-2 sm:mb-4">
             Earrings & Studs Collection
           </h2>
 
-          <p className="font-cormorant italic text-lg sm:text-2xl text-champagne-200/90 max-w-2xl mx-auto leading-relaxed font-light">
+          <p className="font-cormorant italic text-base sm:text-xl text-champagne-200/90 max-w-2xl mx-auto leading-relaxed font-light">
             From majestic 360° royal temple jhumkas to daily diamond studs, each piece is handcrafted for timeless radiance.
           </p>
         </div>
 
         {/* Interactive Spotlight Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center bg-espresso-950/70 border border-gold-500/25 rounded-3xl p-5 sm:p-7 shadow-2xl backdrop-blur-md relative overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center bg-espresso-950/70 border border-gold-500/25 rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl backdrop-blur-md relative overflow-hidden">
           {/* Subtle gold line accent on top */}
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
 
           {/* Left: Product Imagery & 360 Trigger */}
           <div className="lg:col-span-6 flex flex-col items-center">
-            <div className="relative group w-full aspect-[4/3] max-w-[480px] rounded-2xl overflow-hidden bg-[#070504] border border-gold-500/30 flex items-center justify-center p-6 shadow-2xl">
+            <div className="relative group w-full aspect-[4/3] max-w-[480px] rounded-2xl overflow-hidden bg-[#070504] border border-gold-500/30 flex items-center justify-center p-4 sm:p-6 shadow-2xl">
               {/* Subtle Radial Glow */}
               <div className="absolute inset-0 bg-radial from-gold-500/10 via-transparent to-transparent pointer-events-none" />
 
@@ -98,14 +98,14 @@ export const EarringsStudsSpotlight: React.FC<EarringsStudsSpotlightProps> = ({
               {/* 360 Badge Overlay */}
               <button
                 onClick={onExplore360}
-                className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-espresso-950/90 border border-gold-400/40 text-gold-300 text-xs font-mono shadow-gold-glow hover:bg-gold-500 hover:text-espresso-950 transition-all duration-300 group/btn"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-espresso-950/90 border border-gold-400/40 text-gold-300 text-[9px] sm:text-xs font-mono shadow-gold-glow hover:bg-gold-500 hover:text-espresso-950 transition-all duration-300 group/btn"
               >
-                <Rotate3d className="w-4 h-4 text-gold-400 group-hover/btn:text-espresso-950 group-hover/btn:rotate-180 transition-transform duration-500" />
+                <Rotate3d className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gold-400 group-hover/btn:text-espresso-950 group-hover/btn:rotate-180 transition-transform duration-500" />
                 <span>Launch 360° Studio</span>
               </button>
 
-              <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[11px] font-mono text-champagne-300">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[9px] sm:text-[11px] font-mono text-champagne-300">
+                <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400" />
                 <span>22K BIS Hallmarked</span>
               </div>
             </div>
@@ -126,12 +126,12 @@ export const EarringsStudsSpotlight: React.FC<EarringsStudsSpotlightProps> = ({
           {/* Right: Technical Spec Sheet & Reservation */}
           <div className="lg:col-span-6 space-y-4 sm:space-y-5">
             {/* Style Selector Tabs */}
-            <div className="flex flex-wrap gap-2 border-b border-white/10 pb-3.5">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 border-b border-white/10 pb-3.5">
               {(['jhumkas', 'studs', 'chandbalis'] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 ${
+                  className={`px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 ${
                     activeTab === tab
                       ? 'bg-gradient-to-r from-gold-500 to-champagne-300 text-espresso-950 font-bold shadow-gold-glow scale-105'
                       : 'bg-espresso-900/60 border border-gold-500/20 text-white/70 hover:bg-[#FFF3DA] hover:text-[#1E120A] hover:border-[#D4AF37] hover:scale-105 shadow-md'
@@ -151,7 +151,7 @@ export const EarringsStudsSpotlight: React.FC<EarringsStudsSpotlightProps> = ({
                   {current.tag}
                 </span>
               </div>
-              <h3 className="font-serif text-2xl sm:text-4xl text-white font-light mb-3">
+              <h3 className="font-serif text-2xl sm:text-4xl text-white font-light mb-2 sm:mb-3">
                 {current.name}
               </h3>
               <p className="text-xs sm:text-sm text-white/70 font-light leading-relaxed">
@@ -160,7 +160,7 @@ export const EarringsStudsSpotlight: React.FC<EarringsStudsSpotlightProps> = ({
             </div>
 
             {/* Price & Assay Badges */}
-            <div className="flex items-baseline gap-4 py-3 border-y border-gold-500/15">
+            <div className="flex flex-wrap items-baseline gap-2.5 sm:gap-4 py-3 border-y border-gold-500/15">
               <span className="font-mono text-2xl sm:text-3xl font-bold text-gold-300">
                 {current.price}
               </span>
@@ -170,7 +170,7 @@ export const EarringsStudsSpotlight: React.FC<EarringsStudsSpotlightProps> = ({
             </div>
 
             {/* Technical Specification Matrix */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs font-mono">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5 text-xs font-mono">
               <div className="p-3 bg-espresso-900/60 rounded-xl border border-white/5">
                 <span className="text-white/40 block text-[10px] uppercase mb-1">Metal Purity</span>
                 <span className="text-white font-medium">{current.purity}</span>
@@ -193,7 +193,7 @@ export const EarringsStudsSpotlight: React.FC<EarringsStudsSpotlightProps> = ({
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <button
                 onClick={onExplore360}
-                className="gold-glow-btn flex-1 px-6 py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] text-champagne-100 font-bold flex items-center justify-center gap-2"
+                className="w-full sm:w-auto sm:flex-1 gold-glow-btn px-6 py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] text-champagne-100 font-bold flex items-center justify-center gap-2"
               >
                 <span>Spin 360° Perspective</span>
                 <Rotate3d className="w-4 h-4 text-champagne-300" />
@@ -201,7 +201,7 @@ export const EarringsStudsSpotlight: React.FC<EarringsStudsSpotlightProps> = ({
 
               <button
                 onClick={onOpenBooking}
-                className="px-6 py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.15em] text-white/80 hover:text-white border border-gold-500/30 hover:border-gold-400 bg-espresso-900/60 hover:bg-espresso-800 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto sm:flex-1 px-6 py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.15em] text-white/80 hover:text-white border border-gold-500/30 hover:border-gold-400 bg-espresso-900/60 hover:bg-espresso-800 transition-all flex items-center justify-center gap-2"
               >
                 <span>Reserve in Boutique</span>
                 <ArrowRight className="w-3.5 h-3.5 text-gold-400" />

@@ -26,16 +26,16 @@ export const TestimonialsSection: React.FC = () => {
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gold-500/5 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Customer Testimonials Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-gold-500/30 bg-espresso-900/80 backdrop-blur-md mb-2.5 shadow-gold-glow">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 px-2">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 rounded-full border border-gold-500/30 bg-espresso-900/80 backdrop-blur-md mb-2.5 shadow-gold-glow">
             <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-            <span className="text-[10px] tracking-[0.35em] text-champagne-300 uppercase font-mono">
+            <span className="text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.35em] text-champagne-300 uppercase font-mono">
               CLIENT TESTIMONIALS
             </span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl font-light text-white tracking-wide mb-2.5">
+          <h2 className="font-serif text-2xl sm:text-4xl font-light text-white tracking-wide mb-2 sm:mb-2.5">
             What Our Customers Say
           </h2>
           <p className="font-cormorant italic text-base sm:text-lg text-champagne-200/80">
@@ -47,17 +47,17 @@ export const TestimonialsSection: React.FC = () => {
       {/* Infinite Smooth Testimonials Marquee */}
       <div className="relative w-full overflow-hidden mask-gradient py-2 group/marquee">
         {/* Edge Gradient Fades */}
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-[#0D0906] to-transparent z-20" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-[#0D0906] to-transparent z-20" />
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-40 bg-gradient-to-r from-[#0D0906] to-transparent z-20" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-40 bg-gradient-to-l from-[#0D0906] to-transparent z-20" />
 
-        <div className="animate-marquee-smooth group-hover/marquee:[animation-play-state:paused] flex items-stretch gap-6 w-max will-change-transform py-4">
+        <div className="animate-marquee-smooth group-hover/marquee:[animation-play-state:paused] flex items-stretch gap-4 sm:gap-6 w-max will-change-transform py-4">
           {[...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS].map((t, idx) => {
             const isCurrentActive = selectedTestimonial?.id === t.id;
             return (
               <div
                 key={`${t.id}-${idx}`}
                 onClick={() => setSelectedTestimonial(t)}
-                className={`w-[320px] sm:w-[380px] p-7 sm:p-8 rounded-3xl border transition-all duration-300 ease-out flex flex-col justify-between shadow-xl relative group cursor-pointer shrink-0 select-none ${
+                className={`w-[280px] sm:w-[380px] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border transition-all duration-300 ease-out flex flex-col justify-between shadow-xl relative group cursor-pointer shrink-0 select-none ${
                   isCurrentActive
                     ? 'bg-[#FFF3DA] text-[#1E120A] border-[#D4AF37] shadow-[0_20px_50px_rgba(212,175,55,0.4)] scale-[1.04] -translate-y-2 z-10'
                     : 'bg-espresso-900/60 backdrop-blur-md border-gold-500/20 hover:bg-[#FFF3DA] hover:border-[#D4AF37] hover:shadow-[0_25px_60px_rgba(212,175,55,0.35),0_10px_25px_rgba(0,0,0,0.85)] hover:scale-[1.04] hover:-translate-y-2 hover:z-10'
@@ -132,7 +132,7 @@ export const TestimonialsSection: React.FC = () => {
       {/* Pop-In Tab Modal in Cream Color (#FFF3DA) when clicking any client review */}
       <AnimatePresence>
         {selectedTestimonial && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md">
             {/* Backdrop click to close */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -148,22 +148,22 @@ export const TestimonialsSection: React.FC = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative z-10 w-full max-w-2xl bg-[#FFF3DA] text-[#1E120A] rounded-3xl p-7 sm:p-10 border-2 border-[#D4AF37]/50 shadow-[0_25px_80px_rgba(0,0,0,0.85),0_0_50px_rgba(212,175,55,0.25)] overflow-hidden"
+              className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-[#FFF3DA] text-[#1E120A] rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 border-2 border-[#D4AF37]/50 shadow-[0_25px_80px_rgba(0,0,0,0.85),0_0_50px_rgba(212,175,55,0.25)]"
             >
               {/* Subtle royal background watermark quote */}
               <Quote className="absolute -bottom-6 -right-6 w-44 h-44 text-[#C9A227]/10 pointer-events-none rotate-12" />
 
               {/* Top Bar with Badge and Close button */}
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#3D2608]/15 relative z-10">
+              <div className="flex items-center justify-between mb-5 sm:mb-6 pb-3.5 sm:pb-4 border-b border-[#3D2608]/15 relative z-10">
                 <div className="flex items-center gap-2">
-                  <span className="px-3.5 py-1 rounded-full text-[10px] font-mono tracking-widest font-semibold uppercase bg-[#ECDAB3] text-[#3D2608] border border-[#C9A227]/40 flex items-center gap-1.5 shadow-sm">
+                  <span className="px-3 sm:px-3.5 py-1 rounded-full text-[9px] sm:text-[10px] font-mono tracking-widest font-semibold uppercase bg-[#ECDAB3] text-[#3D2608] border border-[#C9A227]/40 flex items-center gap-1.5 shadow-sm">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#8B6D1B]" /> Verified Client Review
                   </span>
                 </div>
 
                 <button
                   onClick={() => setSelectedTestimonial(null)}
-                  className="p-2 rounded-full bg-[#ECDAB3]/80 hover:bg-[#DDC596] text-[#241407] transition-all hover:rotate-90 duration-300 shadow-sm"
+                  className="p-1.5 sm:p-2 rounded-full bg-[#ECDAB3]/80 hover:bg-[#DDC596] text-[#241407] transition-all hover:rotate-90 duration-300 shadow-sm"
                   aria-label="Close comment"
                 >
                   <X className="w-5 h-5" />
@@ -171,18 +171,18 @@ export const TestimonialsSection: React.FC = () => {
               </div>
 
               {/* Star Rating & Quote Accent */}
-              <div className="flex items-center justify-between mb-5 relative z-10">
-                <div className="flex items-center gap-1.5">
+              <div className="flex items-center justify-between mb-4 sm:mb-5 relative z-10">
+                <div className="flex items-center gap-1 sm:gap-1.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-[#B8860B] text-[#B8860B] drop-shadow-sm" />
+                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-[#B8860B] text-[#B8860B] drop-shadow-sm" />
                   ))}
-                  <span className="text-xs font-mono font-bold text-[#8B6D1B] ml-2">5.0 / 5.0 Star Experience</span>
+                  <span className="text-[11px] sm:text-xs font-mono font-bold text-[#8B6D1B] ml-1.5 sm:ml-2">5.0 / 5.0 Star</span>
                 </div>
-                <Quote className="w-8 h-8 text-[#C9A227]/60" />
+                <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-[#C9A227]/60" />
               </div>
 
               {/* Testimonial Quote */}
-              <blockquote className="font-cormorant italic text-xl sm:text-3xl text-[#1E120A] leading-relaxed font-normal mb-8 relative z-10">
+              <blockquote className="font-cormorant italic text-lg sm:text-2xl md:text-3xl text-[#1E120A] leading-relaxed font-normal mb-6 sm:mb-8 relative z-10">
                 "{selectedTestimonial.quote}"
               </blockquote>
 

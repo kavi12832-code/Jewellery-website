@@ -7,14 +7,14 @@ export const CategoriesSection: React.FC<{ onSelectCategory?: (cat: string) => v
   const navigate = useNavigate();
 
   return (
-    <section id="categories" className="py-12 sm:py-16 px-6 sm:px-12 bg-[#0D0906] relative overflow-hidden border-t border-gold-500/15">
+    <section id="categories" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-[#0D0906] relative overflow-hidden border-t border-gold-500/15">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <span className="text-[11px] font-mono tracking-[0.4em] text-gold-400 uppercase block mb-2">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 px-2">
+          <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.35em] sm:tracking-[0.4em] text-gold-400 uppercase block mb-2">
             EXPLORE THE CURATION
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-light text-white tracking-wide mb-2.5">
+          <h2 className="font-serif text-2xl sm:text-4xl font-light text-white tracking-wide mb-2 sm:mb-2.5">
             Shop by Category
           </h2>
           <p className="font-cormorant italic text-base sm:text-lg text-champagne-200/80">
@@ -34,7 +34,7 @@ export const CategoriesSection: React.FC<{ onSelectCategory?: (cat: string) => v
                   navigate(`/collections/${cat.id}`);
                 }
               }}
-              className="group bg-espresso-950/70 p-5 sm:p-6 rounded-3xl border border-gold-500/20 hover:border-gold-400/60 transition-all duration-500 flex flex-col justify-between cursor-pointer shadow-xl hover:shadow-gold-glow relative overflow-hidden hover:-translate-y-1"
+              className="group bg-espresso-950/70 p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-gold-500/20 hover:border-gold-400/60 transition-all duration-500 flex flex-col justify-between h-full cursor-pointer shadow-xl hover:shadow-gold-glow relative overflow-hidden hover:-translate-y-1"
             >
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between">

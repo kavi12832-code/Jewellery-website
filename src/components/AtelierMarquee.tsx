@@ -84,18 +84,18 @@ export const AtelierMarquee: React.FC<{ onOpenBooking: () => void }> = ({ onOpen
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gold-500/5 rounded-full blur-[180px] pointer-events-none" />
 
       {/* Section Header */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 mb-6 sm:mb-8 text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-gold-500/30 bg-espresso-900/60 backdrop-blur-md mb-2 shadow-gold-glow">
-          <span className="text-[10px] tracking-[0.35em] text-champagne-300 uppercase font-mono">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-8 text-center relative z-10">
+        <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 rounded-full border border-gold-500/30 bg-espresso-900/60 backdrop-blur-md mb-2 shadow-gold-glow">
+          <span className="text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.35em] text-champagne-300 uppercase font-mono">
             ARCHIVAL EXHIBITION · BIZJEWELLERY
           </span>
         </div>
 
-        <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-light text-white tracking-wide mb-2">
+        <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-light text-white tracking-wide mb-2 px-2">
           The Atelier Exhibition Tape
         </h2>
 
-        <p className="font-cormorant italic text-base sm:text-lg text-champagne-200/80 max-w-xl mx-auto">
+        <p className="font-cormorant italic text-base sm:text-lg text-champagne-200/80 max-w-xl mx-auto px-2">
           A continuous motion marquee showcasing one-of-a-kind royal parures and museum commissions.
         </p>
       </div>
@@ -103,20 +103,20 @@ export const AtelierMarquee: React.FC<{ onOpenBooking: () => void }> = ({ onOpen
       {/* Infinite Marquee Container with Left & Right Edge Gradient Fades */}
       <div className="relative w-full overflow-hidden space-y-4 select-none">
         {/* Left Fade Gradient */}
-        <div className="absolute top-0 left-0 bottom-0 w-20 sm:w-36 bg-gradient-to-r from-[#0D0906] via-[#0D0906]/80 to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 left-0 bottom-0 w-16 sm:w-36 bg-gradient-to-r from-[#0D0906] via-[#0D0906]/80 to-transparent z-20 pointer-events-none" />
         {/* Right Fade Gradient */}
-        <div className="absolute top-0 right-0 bottom-0 w-20 sm:w-36 bg-gradient-to-l from-[#0D0906] via-[#0D0906]/80 to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 right-0 bottom-0 w-16 sm:w-36 bg-gradient-to-l from-[#0D0906] via-[#0D0906]/80 to-transparent z-20 pointer-events-none" />
 
         {/* Marquee Row 1 (Drifting Left) */}
-        <div className="animate-marquee-smooth flex gap-4 sm:gap-6 px-3">
+        <div className="animate-marquee-smooth flex gap-3.5 sm:gap-6 px-3">
           {row1.map((item, idx) => (
             <div
               key={`row1-${item.id}-${idx}`}
               onClick={() => setSelectedItem(item)}
-              className="group w-[250px] sm:w-[300px] h-[350px] sm:h-[390px] bg-espresso-950/80 rounded-2xl sm:rounded-3xl border border-gold-500/20 hover:border-gold-400/70 p-3.5 sm:p-4 flex flex-col justify-between cursor-pointer transition-all duration-500 shadow-xl hover:shadow-gold-glow hover:-translate-y-1.5 relative overflow-hidden shrink-0"
+              className="group w-[230px] sm:w-[300px] h-[330px] sm:h-[390px] bg-espresso-950/80 rounded-2xl sm:rounded-3xl border border-gold-500/20 hover:border-gold-400/70 p-3 sm:p-4 flex flex-col justify-between cursor-pointer transition-all duration-500 shadow-xl hover:shadow-gold-glow hover:-translate-y-1.5 relative overflow-hidden shrink-0"
             >
               {/* Image Container with Smooth Zoom */}
-              <div className="relative h-[66%] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#070504]">
+              <div className="relative h-[65%] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#070504]">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -131,13 +131,13 @@ export const AtelierMarquee: React.FC<{ onOpenBooking: () => void }> = ({ onOpen
                   <span className="text-[9px] font-mono text-gold-400 uppercase tracking-widest block mb-0.5">
                     {item.frenchTitle}
                   </span>
-                  <h3 className="font-serif text-base sm:text-lg text-white font-medium line-clamp-1 group-hover:text-champagne-200 transition-colors">
+                  <h3 className="font-serif text-sm sm:text-lg text-white font-medium line-clamp-1 group-hover:text-champagne-200 transition-colors">
                     {item.title}
                   </h3>
                 </div>
 
                 <div className="flex items-center justify-between border-t border-white/10 pt-2 text-[10px] sm:text-[11px] font-mono text-white/50">
-                  <span className="text-champagne-300/80 truncate max-w-[160px]">{item.gemstone}</span>
+                  <span className="text-champagne-300/80 truncate max-w-[130px] sm:max-w-[160px]">{item.gemstone}</span>
                   <span className="text-gold-400 flex items-center gap-0.5 group-hover:translate-x-1 transition-transform">
                     <span>Inspect</span>
                     <ArrowUpRight className="w-3 h-3" />
@@ -149,15 +149,15 @@ export const AtelierMarquee: React.FC<{ onOpenBooking: () => void }> = ({ onOpen
         </div>
 
         {/* Marquee Row 2 (Drifting Right) */}
-        <div className="animate-marquee-reverse flex gap-4 sm:gap-6 px-3">
+        <div className="animate-marquee-reverse flex gap-3.5 sm:gap-6 px-3">
           {row2.map((item, idx) => (
             <div
               key={`row2-${item.id}-${idx}`}
               onClick={() => setSelectedItem(item)}
-              className="group w-[250px] sm:w-[300px] h-[350px] sm:h-[390px] bg-espresso-950/80 rounded-2xl sm:rounded-3xl border border-gold-500/20 hover:border-gold-400/70 p-3.5 sm:p-4 flex flex-col justify-between cursor-pointer transition-all duration-500 shadow-xl hover:shadow-gold-glow hover:-translate-y-1.5 relative overflow-hidden shrink-0"
+              className="group w-[230px] sm:w-[300px] h-[330px] sm:h-[390px] bg-espresso-950/80 rounded-2xl sm:rounded-3xl border border-gold-500/20 hover:border-gold-400/70 p-3 sm:p-4 flex flex-col justify-between cursor-pointer transition-all duration-500 shadow-xl hover:shadow-gold-glow hover:-translate-y-1.5 relative overflow-hidden shrink-0"
             >
               {/* Image Container with Smooth Zoom */}
-              <div className="relative h-[66%] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#070504]">
+              <div className="relative h-[65%] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#070504]">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -172,13 +172,13 @@ export const AtelierMarquee: React.FC<{ onOpenBooking: () => void }> = ({ onOpen
                   <span className="text-[9px] font-mono text-gold-400 uppercase tracking-widest block mb-0.5">
                     {item.frenchTitle}
                   </span>
-                  <h3 className="font-serif text-base sm:text-lg text-white font-medium line-clamp-1 group-hover:text-champagne-200 transition-colors">
+                  <h3 className="font-serif text-sm sm:text-lg text-white font-medium line-clamp-1 group-hover:text-champagne-200 transition-colors">
                     {item.title}
                   </h3>
                 </div>
 
                 <div className="flex items-center justify-between border-t border-white/10 pt-2 text-[10px] sm:text-[11px] font-mono text-white/50">
-                  <span className="text-champagne-300/80 truncate max-w-[160px]">{item.metal}</span>
+                  <span className="text-champagne-300/80 truncate max-w-[130px] sm:max-w-[160px]">{item.metal}</span>
                   <span className="text-gold-400 flex items-center gap-0.5 group-hover:translate-x-1 transition-transform">
                     <span>Inspect</span>
                     <ArrowUpRight className="w-3 h-3" />
@@ -192,14 +192,14 @@ export const AtelierMarquee: React.FC<{ onOpenBooking: () => void }> = ({ onOpen
 
       {/* Lightbox / High-Res Dossier Modal */}
       {selectedItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-2xl animate-fadeIn">
-          <div className="relative w-full max-w-3xl bg-espresso-950 rounded-3xl border border-gold-500/40 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div className="flex items-center justify-between p-5 sm:p-6 border-b border-gold-500/15 bg-espresso-900/40">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-2xl animate-fadeIn">
+          <div className="relative w-full max-w-3xl bg-espresso-950 rounded-2xl sm:rounded-3xl border border-gold-500/40 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gold-500/15 bg-espresso-900/40">
               <div>
                 <span className="text-[9px] font-mono tracking-[0.35em] text-gold-400 uppercase block">
                   ARCHIVAL EXHIBITION DOSSIER
                 </span>
-                <h3 className="font-serif text-lg sm:text-xl text-white font-light mt-0.5">
+                <h3 className="font-serif text-base sm:text-xl text-white font-light mt-0.5">
                   {selectedItem.title}
                 </h3>
               </div>
@@ -212,12 +212,12 @@ export const AtelierMarquee: React.FC<{ onOpenBooking: () => void }> = ({ onOpen
               </button>
             </div>
 
-            <div className="p-5 sm:p-8 overflow-y-auto grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              <div className="md:col-span-5 rounded-2xl overflow-hidden border border-gold-500/20 bg-[#070504] shadow-2xl max-h-[260px] flex items-center justify-center">
+            <div className="p-4 sm:p-8 overflow-y-auto grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-center">
+              <div className="md:col-span-5 rounded-xl sm:rounded-2xl overflow-hidden border border-gold-500/20 bg-[#070504] shadow-2xl max-h-[220px] sm:max-h-[260px] flex items-center justify-center">
                 <img
                   src={selectedItem.image}
                   alt={selectedItem.title}
-                  className="w-full h-full max-h-[260px] object-cover"
+                  className="w-full h-full max-h-[220px] sm:max-h-[260px] object-cover"
                 />
               </div>
 
@@ -246,13 +246,13 @@ export const AtelierMarquee: React.FC<{ onOpenBooking: () => void }> = ({ onOpen
                   </div>
                 </div>
 
-                <div className="pt-3">
+                <div className="pt-2 sm:pt-3">
                   <button
                     onClick={() => {
                       setSelectedItem(null);
                       onOpenBooking();
                     }}
-                    className="w-full gold-glow-btn py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] text-champagne-100 font-bold flex items-center justify-center gap-2 shadow-2xl"
+                    className="w-full gold-glow-btn py-3 sm:py-3.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] text-champagne-100 font-bold flex items-center justify-center gap-2 shadow-2xl"
                   >
                     <span>Request Archival Viewing</span>
                     <ArrowUpRight className="w-4 h-4 text-gold-400" />

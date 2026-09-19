@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { COLLECTIONS_DATA } from '../data/jewelleryData';
 import { Rotate3d, ArrowRight, Compass } from 'lucide-react';
@@ -9,7 +9,7 @@ export const CollectionsPage: React.FC = () => {
   const categories = Object.values(COLLECTIONS_DATA);
 
   return (
-    <div className="min-h-screen bg-[#0D0906] pt-20 sm:pt-24 pb-12 px-4 sm:px-8 lg:px-12 relative overflow-hidden flex flex-col justify-between">
+    <div className="min-h-screen bg-[#0D0906] pt-20 sm:pt-24 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden flex flex-col justify-between">
       {/* Dynamic Background Luxury Glows */}
       <div className="absolute top-1/4 left-10 w-[450px] h-[450px] bg-gold-500/5 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-10 w-[450px] h-[450px] bg-amber-900/10 rounded-full blur-[160px] pointer-events-none" />
@@ -64,12 +64,12 @@ export const CollectionsPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.08 * idx }}
               onClick={() => navigate(`/collections/${cat.slug}`)}
-              className="group bg-espresso-950/80 rounded-2xl border border-gold-500/20 hover:border-gold-400/70 transition-all duration-300 p-4 sm:p-4.5 cursor-pointer shadow-xl hover:shadow-gold-glow flex flex-col justify-between relative overflow-hidden hover:-translate-y-1"
+              className="group bg-espresso-950/80 rounded-2xl border border-gold-500/20 hover:border-gold-400/70 transition-all duration-300 p-4 sm:p-4.5 cursor-pointer shadow-xl hover:shadow-gold-glow h-full flex flex-col justify-between relative overflow-hidden hover:-translate-y-1"
             >
               {/* Subtle top gold line accent */}
               <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold-400/30 to-transparent group-hover:via-gold-400 transition-all duration-300" />
 
-              <div>
+              <div className="flex-1 flex flex-col">
                 {/* Scaled-down Image Stage */}
                 <div className="relative h-36 sm:h-40 w-full rounded-xl overflow-hidden bg-[#070504] border border-gold-500/20 flex items-center justify-center p-3 mb-3.5 shadow-inner">
                   {/* Radial glow */}

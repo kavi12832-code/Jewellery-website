@@ -55,7 +55,7 @@ const InteractiveJewelleryCard: React.FC<{
         transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${isHovered ? 1.02 : 1}, ${isHovered ? 1.02 : 1}, 1)`,
         transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
       }}
-      className="group bg-espresso-950/80 rounded-2xl border border-gold-500/20 hover:border-gold-400/60 transition-colors duration-500 overflow-hidden flex flex-col justify-between shadow-xl hover:shadow-gold-glow relative will-change-transform"
+      className="group bg-espresso-950/80 rounded-2xl border border-gold-500/20 hover:border-gold-400/60 transition-colors duration-500 overflow-hidden flex flex-col justify-between h-full shadow-xl hover:shadow-gold-glow relative will-change-transform"
     >
       {/* Specular Light Reflection Follower */}
       <div
@@ -69,7 +69,7 @@ const InteractiveJewelleryCard: React.FC<{
       {/* Product Image Stage */}
       <div
         onClick={() => onSelectPiece(piece)}
-        className="relative h-44 sm:h-52 w-full bg-[#070504] flex items-center justify-center p-3 sm:p-4 overflow-hidden cursor-pointer"
+        className="relative h-40 sm:h-52 w-full bg-[#070504] flex items-center justify-center p-3 sm:p-4 overflow-hidden cursor-pointer"
       >
         <div
           className="absolute inset-0 transition-opacity duration-700 pointer-events-none"
@@ -83,19 +83,19 @@ const InteractiveJewelleryCard: React.FC<{
         <img
           src={piece.image}
           alt={piece.name}
-          className="w-full h-full max-h-[180px] object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-all duration-700 ease-out z-10"
+          className="w-full h-full max-h-[150px] sm:max-h-[180px] object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-all duration-700 ease-out z-10"
         />
       </div>
 
       {/* Product Content & Price */}
       <div
         onClick={() => onSelectPiece(piece)}
-        className="p-3 sm:p-3.5 px-4 flex items-center justify-between bg-espresso-950/90 border-t border-gold-500/15 relative z-10 cursor-pointer hover:bg-espresso-900 transition-colors"
+        className="p-3 sm:p-3.5 px-3.5 sm:px-4 flex items-center justify-between bg-espresso-950/90 border-t border-gold-500/15 relative z-10 cursor-pointer hover:bg-espresso-900 transition-colors gap-2"
       >
-        <h3 className="font-serif text-sm sm:text-base text-white font-light tracking-wide group-hover:text-champagne-100 transition-colors truncate max-w-[65%]">
+        <h3 className="font-serif text-xs sm:text-sm md:text-base text-white font-light tracking-wide group-hover:text-champagne-100 transition-colors truncate flex-1">
           {piece.name}
         </h3>
-        <span className="text-sm sm:text-base font-mono text-champagne-200 font-bold tracking-wider shrink-0">
+        <span className="text-xs sm:text-sm md:text-base font-mono text-champagne-200 font-bold tracking-wider shrink-0">
           {piece.price}
         </span>
       </div>
@@ -116,7 +116,7 @@ export const CollectionShowcase: React.FC<CollectionShowcaseProps> = ({
     : BRIDAL_COLLECTION.filter((p) => p.category === selectedCategory || (selectedCategory === 'Diamond Collection' && p.category.includes('Diamond')));
 
   return (
-    <section id="collections" className="py-10 sm:py-14 px-6 sm:px-12 bg-[#0D0906] relative overflow-hidden">
+    <section id="collections" className="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 bg-[#0D0906] relative overflow-hidden">
       {/* Ambient background glow */}
       <div className="absolute top-1/3 right-10 w-96 h-96 bg-gold-500/5 rounded-full blur-[160px] pointer-events-none" />
 
@@ -138,12 +138,12 @@ export const CollectionShowcase: React.FC<CollectionShowcaseProps> = ({
           </div>
 
           {/* Category Filter Pills with Cream Hover */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-widest transition-all duration-300 ${
+                className={`px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-widest transition-all duration-300 ${
                   selectedCategory === cat
                     ? 'bg-gradient-to-r from-gold-500 to-champagne-300 text-espresso-950 font-bold shadow-gold-glow scale-105'
                     : 'bg-espresso-900/60 text-white/70 border border-white/10 hover:bg-[#FFF3DA] hover:text-[#1E120A] hover:border-[#D4AF37] hover:scale-105 shadow-sm'

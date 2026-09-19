@@ -75,29 +75,29 @@ export const Navbar: React.FC<NavbarProps> = ({
             : 'bg-gradient-to-b from-[#0D0906]/90 via-[#0D0906]/40 to-transparent py-6 border-b border-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Brand Wordmark */}
           <Link
             to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="group flex flex-col items-start focus:outline-none"
+            className="group flex flex-col items-start focus:outline-none shrink-0"
           >
-            <span className="font-serif tracking-[0.25em] text-lg sm:text-2xl font-semibold text-white group-hover:text-[#F5F0E6] transition-colors duration-250 ease-out">
-              Bizjewellery
+            <span className="font-serif tracking-[0.25em] text-lg sm:text-xl md:text-2xl font-semibold text-white group-hover:text-[#F5F0E6] transition-colors duration-250 ease-out uppercase">
+              BIZJEWELLERY
             </span>
-            <span className="text-[9px] tracking-[0.35em] text-gold-500/80 font-mono uppercase mt-0.5">
+            <span className="text-[8px] sm:text-[9px] tracking-[0.28em] sm:tracking-[0.35em] text-[#C9A227] font-mono uppercase mt-0.5 font-medium">
               FINE CRAFTSMANSHIP · EST. 1990
             </span>
           </Link>
 
           {/* Center Navigation Links (Desktop) */}
-          <nav className="hidden lg:flex items-center space-x-6">
+          <nav className="hidden lg:flex items-center space-x-7">
             {navLinks.map((item) => (
               <a
                 key={item.name}
                 href={item.path}
                 onClick={(e) => handleLinkClick(e, item)}
-                className="nav-link relative text-xs tracking-[0.2em] uppercase font-medium py-1 group cursor-pointer transition-all duration-250 hover:text-[#F5F0E6]"
+                className="nav-link relative text-xs tracking-[0.22em] uppercase font-medium py-1 group cursor-pointer transition-all duration-250 hover:text-[#F5F0E6]"
               >
                 <span>{item.name}</span>
                 <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gradient-to-r from-transparent via-gold-400 to-transparent group-hover:w-full transition-all duration-300"></span>
@@ -110,15 +110,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Primary Gold CTA */}
             <button
               onClick={onOpenBooking}
-              className="gold-glow-btn px-5 py-2 rounded-full text-[11px] tracking-[0.16em] uppercase font-semibold text-champagne-100 flex items-center gap-1.5 group shadow-gold-glow"
+              className="border border-[#C9A227]/60 hover:border-[#C9A227] bg-[#0D0906]/60 hover:bg-[#C9A227]/15 px-5 py-2 rounded-full text-[11px] tracking-[0.16em] uppercase font-mono font-medium text-[#E8C9A0] hover:text-white flex items-center gap-1.5 group shadow-sm transition-all duration-300 whitespace-nowrap"
             >
               <span>Book an Appointment</span>
-              <ChevronRight className="w-3 h-3 text-gold-400 group-hover:translate-x-0.5 transition-transform" />
+              <ChevronRight className="w-3.5 h-3.5 text-[#C9A227] group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>
 
           {/* Mobile Hamburger Button */}
-          <div className="flex items-center space-x-3 lg:hidden">
+          <div className="flex items-center space-x-2 sm:space-x-3 lg:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-white/80 hover:text-[#F5F0E6] focus:outline-none rounded-lg border border-gold-500/20 bg-espresso-800/40 transition-colors duration-250"
@@ -132,32 +132,32 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-espresso-950/98 backdrop-blur-2xl lg:hidden flex flex-col justify-between pt-24 pb-10 px-8 transition-all duration-500">
-          <div className="space-y-5 flex flex-col items-center text-center mt-6">
+        <div className="fixed inset-0 z-40 bg-espresso-950/98 backdrop-blur-2xl lg:hidden flex flex-col justify-between pt-20 sm:pt-24 pb-8 sm:pb-10 px-6 sm:px-8 overflow-y-auto max-h-screen transition-all duration-500">
+          <div className="space-y-4 sm:space-y-5 flex flex-col items-center text-center mt-4 sm:mt-6">
             <span className="text-[10px] tracking-[0.4em] text-gold-500 uppercase font-mono">Bizjewellery Menu</span>
             {navLinks.map((item) => (
               <a
                 key={item.name}
                 href={item.path}
                 onClick={(e) => handleLinkClick(e, item)}
-                className="nav-link text-lg font-serif tracking-[0.18em] uppercase py-2.5 border-b border-white/5 w-full block"
+                className="nav-link text-base sm:text-lg font-serif tracking-[0.18em] uppercase py-2.5 border-b border-white/5 w-full block"
               >
                 {item.name}
               </a>
             ))}
           </div>
 
-          <div className="space-y-4 pt-6 border-t border-gold-500/20 text-center">
+          <div className="space-y-3 sm:space-y-4 pt-6 border-t border-gold-500/20 text-center mt-6">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenBooking();
               }}
-              className="w-full gold-glow-btn py-3.5 rounded-full text-xs tracking-[0.2em] uppercase font-semibold text-champagne-200"
+              className="w-full gold-glow-btn py-3 sm:py-3.5 rounded-full text-xs tracking-[0.2em] uppercase font-semibold text-champagne-200"
             >
               Book an Appointment
             </button>
-            <p className="text-[11px] text-white/40 tracking-wider font-mono">
+            <p className="text-[10px] sm:text-[11px] text-white/40 tracking-wider font-mono">
               123 Anna Salai, Chennai · Flagship Showroom
             </p>
           </div>
