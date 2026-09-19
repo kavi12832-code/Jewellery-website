@@ -122,17 +122,17 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
               }}
               className="w-full flex justify-start pointer-events-auto"
             >
-              <div className="max-w-md text-left bg-espresso-950/70 backdrop-blur-xl p-5 sm:p-6 rounded-2xl border border-gold-500/20 shadow-2xl shadow-black/80 relative overflow-hidden">
+              <div className="max-w-md text-left bg-transparent p-5 sm:p-6 rounded-2xl border border-gold-500/30 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-16 h-[2px] bg-gradient-to-r from-gold-500 to-transparent" />
-                <h2 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide leading-tight mb-2.5">
+                <h2 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide leading-tight mb-2.5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
                   The Art Behind Every Piece
                 </h2>
 
-                <p className="text-xs sm:text-sm text-champagne-200/80 mb-2 font-light leading-relaxed">
+                <p className="text-xs sm:text-sm text-champagne-200 mb-2 font-light leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                   Every Bizjewellery creation begins as a sketch and ends as a story.
                 </p>
 
-                <p className="text-xs text-white/60 font-light leading-relaxed">
+                <p className="text-xs text-white/80 font-light leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                   Our artisans spend upward of forty hours on a single piece — casting, setting, and polishing by hand. Passed down through generations of goldsmiths.
                 </p>
               </div>
@@ -154,13 +154,13 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
               }}
               className="w-full flex justify-end pointer-events-auto"
             >
-              <div className="max-w-md text-left bg-espresso-950/70 backdrop-blur-xl p-5 sm:p-6 rounded-2xl border border-gold-500/20 shadow-2xl shadow-black/80 relative overflow-hidden">
+              <div className="max-w-md text-left bg-transparent p-5 sm:p-6 rounded-2xl border border-gold-500/30 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-20 h-[2px] bg-gradient-to-l from-gold-500 to-transparent" />
-                <h2 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide leading-tight mb-2.5">
+                <h2 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide leading-tight mb-2.5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
                   Certified Gemstones
                 </h2>
 
-                <div className="space-y-1.5 text-xs text-white/75 font-light leading-relaxed">
+                <div className="space-y-1.5 text-xs text-white/85 font-light leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                   <p className="flex items-start gap-2">
                     <span className="text-gold-400 font-bold">•</span>
                     <span>Each gemstone individually selected for clarity and fire.</span>
@@ -193,17 +193,17 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
               }}
               className="w-full flex justify-start pointer-events-auto"
             >
-              <div className="max-w-md text-left bg-espresso-950/70 backdrop-blur-xl p-5 sm:p-6 rounded-2xl border border-gold-500/20 shadow-2xl shadow-black/80 relative">
+              <div className="max-w-md text-left bg-transparent p-5 sm:p-6 rounded-2xl border border-gold-500/30 relative">
                 <div className="absolute top-0 left-0 w-16 h-[2px] bg-gradient-to-r from-gold-500 to-transparent" />
-                <h2 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide leading-tight mb-2.5">
+                <h2 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide leading-tight mb-2.5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
                   Polished for Every Light
                 </h2>
 
-                <p className="text-xs sm:text-sm text-champagne-200/80 mb-2 font-light leading-relaxed">
+                <p className="text-xs sm:text-sm text-champagne-200 mb-2 font-light leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                   A final hand-polish brings out a warmth no machine can replicate.
                 </p>
 
-                <p className="text-xs text-white/60 font-light leading-relaxed">
+                <p className="text-xs text-white/80 font-light leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                   Jewellery made to be worn for generations. Every surface reflects light with buttery specular brilliance.
                 </p>
               </div>
@@ -223,21 +223,21 @@ export const StoryBeatsOverlay = React.memo<StoryBeatsOverlayProps>(({
                 transform: `translateY(${y}px)`,
                 transition: 'opacity 0.25s ease-out, transform 0.25s ease-out'
               }}
-              className="text-center max-w-3xl mx-auto flex flex-col items-center pointer-events-auto bg-espresso-950/70 backdrop-blur-2xl p-5 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl border border-gold-500/30 shadow-2xl shadow-gold-950/30"
+              className="text-center max-w-3xl mx-auto flex flex-col items-center pointer-events-auto bg-transparent p-5 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl border border-gold-500/30"
             >
-              <span className="text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] text-gold-400 uppercase font-mono mb-2 sm:mb-3">
+              <span className="text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] text-gold-400 uppercase font-mono mb-2 sm:mb-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                 THE BRIDAL EDIT
               </span>
 
-              <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.04em] sm:tracking-[0.06em] text-white mb-2 sm:mb-3">
+              <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.04em] sm:tracking-[0.06em] text-white mb-2 sm:mb-3 drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
                 Timeless as Your Promise
               </h2>
 
-              <p className="font-cormorant italic text-lg sm:text-2xl text-champagne-300 font-normal mb-3 sm:mb-5">
+              <p className="font-cormorant italic text-lg sm:text-2xl text-champagne-300 font-normal mb-3 sm:mb-5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
                 Designed to be worn today, and inherited tomorrow.
               </p>
 
-              <p className="text-xs sm:text-sm text-white/60 max-w-md mx-auto mb-8 font-light">
+              <p className="text-xs sm:text-sm text-white/80 max-w-md mx-auto mb-8 font-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                 Our bridal collection blends traditional craftsmanship with contemporary elegance.
               </p>
 
