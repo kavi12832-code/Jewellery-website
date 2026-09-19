@@ -19,10 +19,10 @@ export const Footer: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking 
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gold-500/5 rounded-full blur-[180px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 space-y-10 sm:space-y-12">
-        {/* 5-Column Footer Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
+        {/* Footer Grid: 2 Columns on Mobile, 5 Columns on Desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-10 sm:gap-8 lg:gap-10">
           {/* Column 1 — Brand */}
-          <div className="space-y-4 lg:col-span-1">
+          <div className="space-y-4 col-span-2 lg:col-span-1">
             <h3 className="font-serif text-2xl font-semibold tracking-wider text-white">
               Bizjewellery
             </h3>
@@ -48,7 +48,7 @@ export const Footer: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking 
           </div>
 
           {/* Column 2 — Shop */}
-          <div className="space-y-3 text-xs font-light">
+          <div className="space-y-3 text-xs font-light col-span-1">
             <h4 className="font-mono text-xs uppercase tracking-widest text-gold-400 font-semibold mb-3">
               Shop
             </h4>
@@ -61,7 +61,7 @@ export const Footer: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking 
           </div>
 
           {/* Column 3 — Company */}
-          <div className="space-y-3 text-xs font-light">
+          <div className="space-y-3 text-xs font-light col-span-1">
             <h4 className="font-mono text-xs uppercase tracking-widest text-gold-400 font-semibold mb-3">
               Company
             </h4>
@@ -73,7 +73,7 @@ export const Footer: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking 
           </div>
 
           {/* Column 4 — Support */}
-          <div className="space-y-3 text-xs font-light">
+          <div className="space-y-3 text-xs font-light col-span-1">
             <h4 className="font-mono text-xs uppercase tracking-widest text-gold-400 font-semibold mb-3">
               Support
             </h4>
@@ -86,7 +86,7 @@ export const Footer: React.FC<{ onOpenBooking: () => void }> = ({ onOpenBooking 
           </div>
 
           {/* Column 5 — Newsletter (Stay in the Loop) */}
-          <div className="space-y-3 lg:col-span-1">
+          <div className="space-y-3 col-span-1 lg:col-span-1">
             <h4 className="font-mono text-xs uppercase tracking-widest text-gold-400 font-semibold mb-2">
               Stay in the Loop
             </h4>
